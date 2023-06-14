@@ -18,16 +18,12 @@ sed i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
 
 case $sel in
 "Nvidia driver")
-	clear
 	menu install/drivers/nvidia
 	;;
 "Mkinitcpio firmware")
-	clear
-	read -n1 -rep "Do you want to start firmware installation (y/n) ? " strt
-	if [[ $start = ^[yY]$ ]]; then
+  if (confirm "Do you want to install firmware ? \n "); then
 		yay -S --noconfirm mkinitcpio-firmware
-	fi
-	pressanykey
+  fi
 	;;
 esac
 

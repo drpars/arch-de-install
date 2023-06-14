@@ -13,9 +13,12 @@ if [ ! "$?" = "0" ]; then
 fi
 
 case $sel in
-  "Virt Manager")
-    script install/others/vm
-    ;;
+"Virt Manager")
+	message "This is an autoscript. \nIf you confirm will start installation."
+	if (confirm "Do you want to start Virt manager installation"); then
+		script install/others/vm
+	fi
+	;;
 esac
 
 exit 0

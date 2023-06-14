@@ -1,0 +1,21 @@
+#!/bin/bash
+. ./lib
+
+if [ -f /usr/bin/sddm ]; then
+	sddm_conf_dir=/etc/sddm.conf.d
+	if [ ! -d "$sddm_conf_dir" ]; then
+		printf "$sddm_conf_dir not found, creating...\n"
+		sudo mkdir "$sddm_conf_dir"
+		echo -e "[Theme]\nCurrent=sugar-candy" | sudo tee "$sddm_conf_dir/10-theme.conf"
+		sudo cp $DIR/dotfiles/config/wayland/extra/sddm/sddm.conf "$sddm_conf_dir/"
+	fi
+	sugar_candy_dir=/usr/share/sddm/themes/sugar-candy
+	if [ ! -d "$sugar_candy_dir" ]; then
+		printf "$sugar_candy_dir not found, creating...\n"
+		sudo tar -xzvf $DIR/dotfiles/config/wayland/extra/sddm/sugar-candy/sugar-candy.tar.gz -C /usr/share/sddm/themes/
+		sudo cp $DIR/dotfiles/config/wayland/extra/sddm/sugar-candy/theme.conf "$sugar_candy_dir/"
+		sudo cp $DIR/dotfiles/config/wayland/extra/sddm/sugar-candy/background.jpg "$sugar_candy_dir/Backgrounds/"
+	fi
+else
+	message "Sddm not installed. \nFirst install sddm!"
+fi

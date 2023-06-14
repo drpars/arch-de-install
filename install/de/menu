@@ -19,9 +19,7 @@ sed i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
 
 case $sel in
 "Hyprland")
-	clear
-	script install/de/hyprland
-	pressanykey
+	script install/de/hypr
 	;;
 "KDE/Plasma")
 	clear

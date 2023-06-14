@@ -6,6 +6,7 @@ options+=(
 	"Samba settings" ""
 	"Disk settings" ""
 	"Hibernation settings" ""
+	"Sddm settings" ""
 	"Copy dotfiles" "Hyprland"
 )
 sel=$(dialog --backtitle "$apptitle" --title "Settings :" --cancel-button "Back" --menu "" 0 0 0 \
@@ -43,26 +44,15 @@ case $sel in
 		pressanykey
 	fi
 	;;
+"Sddm settings")
+		script config/sddm
+	fi
+	;;
 "Copy dotfiles")
 	if (confirm "Do you want to copy all dotfiles ? \n "); then
 		clear
-		echo "Copying dotfiles..."
-		git clone https://gitlab.com/drpars/dotfiles.git
-    # hypr
-		cp -r $DIR/dotfiles/config/wayland/{hypr,mako,scripts,swaylock,waybar,wlogout,wofi} $DIRUSER/.config/
-    # user files
-		cp $DIR/dotfiles/.zshrc $DIRUSER/
-		cp $DIR/dotfiles/.gtkrc-2.0 $DIRUSER/
-		# ~/.config
-    cp $DIR/dotfiles/config/kdeglobals $DIRUSER/.config/
-		cp -r $DIR/dotfiles/config/{btop,gtk-3.0,imv,kitty,mc,Mousepad,nwg-look,qt5ct,Thunar,xfce4,xsettingsd} $DIRUSER/.config/
-		cp $DIR/dotfiles/scripts/* $DIRUSER/.config/scripts/
-		# make executable scripts files
-		chmod +x $DIRUSER/.config/scripts/*
-		chmod +x $DIRUSER/.config/scripts/waybar/*
-		chmod +x $DIRUSER/.config/hypr/xdg-portal-hyprland
-		# wallpapers
-		cp -r $DIR/dotfiles/Wallpaper $DIRUSER/Resimler/
+		script config/hypr-dot
+		pressanykey
 	else
 		message "Nothing copied \n "
 	fi

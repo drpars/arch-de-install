@@ -1,0 +1,47 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+	"Samba settings" ""
+	"Disk settings" ""
+	"Hibernation settings" ""
+)
+sel=$(dialog --backtitle "$apptitle" --title "Settings :" --cancel-button "Back" --menu "" 0 0 0 \
+	"${options[@]}" \
+	3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+	exit 1
+fi
+
+case $sel in
+"Samba settings")
+  message "Script will open neovim editor. \nTo quit press ":q""
+	nvim config/samba
+	if (confirm "Do you want to apply samba script ?"); then
+		clear
+		script config/samba
+		pressanykey
+	fi
+	;;
+"Disk settings")
+  message "Script will open neovim editor. \nTo quit press ":q""
+	nvim config/disks
+	if (confirm "Do you wanto apply disks script ?"); then
+		clear
+		script config/disks
+		pressanykey
+	fi
+	;;
+"Hibernation settings")
+  message "Script will open neovim editor. \nTo quit press ":q""
+	nvim config/disks
+	if (confirm "Do you want to apply hibernation script ?"); then
+		clear
+		script config/hibernation
+		pressanykey
+	fi
+	;;
+esac
+
+exit 0

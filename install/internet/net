@@ -1,0 +1,39 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+	"firefox" "" on
+	"firefox-i18n" "" on
+	"chromium" "" off
+	"thunderbird" "" on
+	"thunderbird-i18n" "" on
+	"wget" "" on
+	"uget" "" on
+	"transmission-gtk" "" on
+  "webapp-manager" "(AUR)" on
+)
+sel=$(dialog --backtitle "$apptitle" --title "Internet applications :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
+	"${options[@]}" \
+	3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+	exit 1
+fi
+
+for itm in $sel; do
+	case $itm in
+	"firefox-i18n") pkg=$pkg ;;
+	"webapp-manager") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
+	esac
+done
+
+instpkg "$pkg" "$aurpkg"
+
+for itm in $sel; do
+	case $itm in
+	"firefox-i18n") choosepkg "firefox-i18n-" ;;
+	esac
+done
+
+exit 0

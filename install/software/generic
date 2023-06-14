@@ -1,0 +1,38 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+	"thunar" "" on
+	"thunar-volman" "" on
+	"thunar-archive-plugin" "" on
+	"dolphin" "" on
+	"dolphin-plugins" "" on
+	"krusader" "" on
+	"tumbler" "" on
+	"ffmpegthumbs" "" on
+	"file-roller" "" on
+	"mousepad" "" on
+	"piper" "" on
+	"steam" "" on
+	"isomaster" "(AUR)" off
+	"startup-settings-git" "(AUR)" off
+)
+sel=$(dialog --backtitle "$apptitle" --title "Generic Applications :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
+	"${options[@]}" \
+	3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+	exit 1
+fi
+
+for itm in $sel; do
+	case $itm in
+	"isomaster") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"startup-settings-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
+	esac
+done
+
+instpkg "$pkg" "$aurpkg"
+
+exit 0

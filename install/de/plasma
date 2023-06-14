@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# plasma package
+sudo pacman -S --needed --noconfirm plasma plasma-wayland-session
+# kde-applications
+sudo pacman -S --needed --noconfirm ark dolphin dolphin-plugins elisa ffmpegthumbs gwenview kalzium kate kcharselect kcolorchooser kdeconnect kdegraphics-thumbnailers kdenetwork-filesharing kdesdk-thumbnailers kdialog kfind kio-extras kio-gdrive kolourpaint konsole ksystemlog ktouch lokalize okular print-manager spectacle
+# kde-utilies
+sudo pacman -S --needed --noconfirm kdiskmark packagekit-qt5
+sudo pacman -S --needed --noconfirm sddm
+# themes
+# sudo pacman -S --needed --noconfirm kvantum-qt5
+sudo pacman -S --needed --noconfirm latte-dock
+# kde
+# yay -S --noconfirm latte-dock-git 
+# lightlyshaders-git
+yay -S --noconfirm lightly-git
+# plasma5-applets-window-appmenu
+yay -S --noconfirm plasma5-applets-virtual-desktop-bar-git
+yay -S sddm-conf-git
+
+# for wayland settings -> /arch-de-setup/config/wayland.sh(?)
+
+systemctl enable sddm

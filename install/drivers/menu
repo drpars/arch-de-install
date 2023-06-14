@@ -1,0 +1,34 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+	"Nvidia driver" ""
+	"Mkinitcpio firmware" ""
+)
+
+defaultitem=""
+sel=$(dialog --backtitle "$apptitle" --title "Drivers :" --default-item "$defultitem" --cancel-button "Back" --menu "" 0 0 0 \
+	"${options[@]}" \
+	3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+	exit 1
+fi
+sed i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
+
+case $sel in
+"Nvidia driver")
+	clear
+	menu install/drivers/nvidia
+	;;
+"Mkinitcpio firmware")
+	clear
+	read -n1 -rep "Do you want to start firmware installation (y/n) ? " strt
+	if [[ $start = ^[yY]$ ]]; then
+		yay -S --noconfirm mkinitcpio-firmware
+	fi
+	pressanykey
+	;;
+esac
+
+exit 0

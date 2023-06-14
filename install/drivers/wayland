@@ -1,0 +1,46 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+	"libva" "" on
+	"nvidia-525xx-dkms" "(AUR)" on
+	"nvidia-525xx-utils" "(AUR)" on
+	"lib32-nvidia-525xx-utils" "(AUR)" on
+	"opencl-nvidia-525xx" "(AUR)" on
+	"lib32-opencl-nvidia-525xx" "(AUR)" on
+	"nvidia-525xx-settings" "(AUR)" on
+	"libva-nvidia-driver-git" "(AUR)" on
+)
+sel=$(dialog --backtitle "$apptitle" --title "Nvidia for wayland :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
+	"${options[@]}" \
+	3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+	exit 1
+fi
+
+for itm in $sel; do
+	case $itm in
+	# "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"nvidia-525xx-dkms") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"nvidia-525xx-utils") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"lib32-nvidia-525xx-utils") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"opencl-nvidia-525xx") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"lib32-opencl-nvidia-525xx") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"nvidia-525xx-settings") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"libva-nvidia-driver-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
+	esac
+done
+
+instpkg "$pkg" "$aurpkg"
+
+# NVIDIA modules in mkinitcpio
+sudo sed -i "s/MODULES=()/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm kvm kvm_intel)/g" /etc/mkinitcpio.conf
+sudo mkinitcpio -P
+# Additional steps
+sudo echo -e "options nvidia-drm modeset=1" | sudo tee -a /etc/modprobe.d/nvidia.conf
+# Blacklist nouveau
+sudo echo -e "blacklist nouveau" | sudo tee -a /etc/modprobe.d/nouveau.conf
+
+exit 0

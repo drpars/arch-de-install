@@ -1,0 +1,28 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+	"Aur" ""
+	"Install" ""
+  "Config" ""
+	"Shutdown" ""
+)
+
+defaultitem=""
+sel=$(dialog --backtitle "$apptitle" --title "Main Menu :" --default-item "$defultitem" --cancel-button "Exit" --menu "" 0 0 0 \
+	"${options[@]}" \
+	3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+	exit 1
+fi
+sed i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
+
+case $sel in
+"Aur") menu aur/menu ;;
+"Install") menu install/menu ;;
+"Config") menu config/menu ;;
+"Shutdown") menu shutdown/menu ;;
+esac
+
+exit 0

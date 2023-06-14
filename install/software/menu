@@ -1,0 +1,30 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+	"Console" ""
+	"Generic" ""
+  "Programming Language" ""
+  "Others" ""
+)
+
+defaultitem=""
+sel=$(dialog --backtitle "$apptitle" --title "Softwares :" --default-item "$defaultitem" --cancel-button "Back" --menu "" 0 0 0 \
+	"${options[@]}" \
+	3>&1 1>&2 2>&3)
+
+if [ ! "$?" = "0" ]; then
+	exit 1
+fi
+
+sed -i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
+
+case $sel in
+"Console") script install/software/console ;;
+"Generic") script install/software/generic ;;
+"Programming Language") script install/software/prglng ;;
+"Others") script install/software/others ;;
+esac
+
+exit 0

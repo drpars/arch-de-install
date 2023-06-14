@@ -1,0 +1,30 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+	"lightly-git" "(AUR)" on
+	"gtk-engine-murrine" "" on
+	"qt5-graphicaleffects" "" on
+	"qt5-quickcontrols2" "" on
+	"qt5-svg" "" on
+)
+
+sel=$(dialog --backtitle "$apptitle" --title "Others :" --cancel-button "Back" --checklist "Theme dependencies" 0 0 0 \
+	"${options[@]}" \
+	3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+	exit 1
+fi
+
+for itm in $sel; do
+	case $itm in
+	# "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"lightly-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
+	esac
+done
+
+instpkg "$pkg" "$aurpkg"
+
+exit 0

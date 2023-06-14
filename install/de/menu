@@ -1,0 +1,38 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+	"Hyprland" ""
+	"KDE/Plasma" ""
+	"Gnome" ""
+)
+
+defaultitem=""
+sel=$(dialog --backtitle "$apptitle" --title "Desktop Environment :" --default-item "$defultitem" --cancel-button "Back" --menu "" 0 0 0 \
+	"${options[@]}" \
+	3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+	exit 1
+fi
+sed i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
+
+case $sel in
+"Hyprland")
+	clear
+	script install/de/hyprland
+	pressanykey
+	;;
+"KDE/Plasma")
+	clear
+	script install/de/plasma
+	pressanykey
+	;;
+"Gnome")
+	clear
+	script install/de/gnome
+	pressanykey
+	;;
+esac
+
+exit 0

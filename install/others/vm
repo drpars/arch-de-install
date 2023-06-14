@@ -1,0 +1,16 @@
+#!/bin/bash
+. ./lib
+
+user=$(whoami)
+
+# bridge-utils?
+sudo pacman -S --needed libvirt qemu-full iptables-nft dnsmasq openbsd-netcat dmidecode virt-manager libguestfs edk2-ovmf libvirt-python
+sudo usermod -a -G libvirt $user
+
+# printf "%s\n" "LIBVIRTD_ARGS=\"--listen\"" "listen_tls = 0" "listen_tcp = 1" "auth_tcp=\"none\"" | sudo tee -a /etc/libvirt/libvirtd.conf
+printf "%s\n" "" "hosts: files libvirt libvirt_guest dns PANTHERA-ARCH" | sudo tee -a /etc/nsswitch.conf
+printf "%s\n" "options kvm_intel nested=1" | sudo tee -a /etc/modprobe.d/kvm_intel.conf
+
+printf "%s\n" "" "# User Settings" "user = \"$user\"" "group = \"$user\"" | sudo tee -a /etc/libvirt/qemu.conf
+
+sudo systemctl enable libvirtd.service

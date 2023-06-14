@@ -1,0 +1,44 @@
+#!/bin/bash
+. .lib
+
+options=()
+options+=(
+	# java
+	"jre-openjdk-headless" "" on
+	"jre-openjdk" "" on
+	"jdk-openjdk" "" on
+	"openjdk-doc" "" on
+	"openjdk-src" "" on
+	# Python
+	"python" "" on
+	"python-pip" "" on
+	"python-psutil" "" on
+	"python-requests" "" on
+	# others
+	"go" "" on
+	"npm" "" on
+	"xmlstarlet" "" on
+	"luarocks" "" on
+	"ruby" "" on
+	"rubygems" "" on
+	"composer" "" on
+	"php" "" on
+	"julia" "" on
+	"cpanminus" "" on
+)
+sel=$(dialog --backtitle "$apptitle" --title "Programming Language :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
+	"${options[@]}" \
+	3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+	exit 1
+fi
+
+for itm in $sel; do
+	case $itm in
+	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
+	esac
+done
+
+instpkg "$pkg" "$aurpkg"
+
+exit 0

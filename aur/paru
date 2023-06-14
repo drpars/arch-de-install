@@ -1,0 +1,11 @@
+#!/bin/bash
+. ./lib
+
+# Paru
+clear
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si --noconfirm
+cd ..
+sudo rm -rf paru
+pressanykey

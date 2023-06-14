@@ -1,23 +1,66 @@
 #!/bin/bash
+. ./lib
 
-# plasma package
-sudo pacman -S --needed --noconfirm plasma plasma-wayland-session
-# kde-applications
-sudo pacman -S --needed --noconfirm ark dolphin dolphin-plugins elisa ffmpegthumbs gwenview kalzium kate kcharselect kcolorchooser kdeconnect kdegraphics-thumbnailers kdenetwork-filesharing kdesdk-thumbnailers kdialog kfind kio-extras kio-gdrive kolourpaint konsole ksystemlog ktouch lokalize okular print-manager spectacle
-# kde-utilies
-sudo pacman -S --needed --noconfirm kdiskmark packagekit-qt5
-sudo pacman -S --needed --noconfirm sddm
-# themes
-# sudo pacman -S --needed --noconfirm kvantum-qt5
-sudo pacman -S --needed --noconfirm latte-dock
-# kde
-# yay -S --noconfirm latte-dock-git 
-# lightlyshaders-git
-yay -S --noconfirm lightly-git
-# plasma5-applets-window-appmenu
-yay -S --noconfirm plasma5-applets-virtual-desktop-bar-git
-yay -S sddm-conf-git
+options=()
+options+=(
+	"plasma" "" on
+	"plasma-wayland-session" "" on
+	"ark" "" on
+	"dolphin" "" on
+	"dolphin-plugins" "" on
+	"elisa" "" on
+	"ffmpegthumbs" "" on
+	"gwenview" "" on
+	"kalzium" "" off
+	"kate" "" on
+	"kcharselect" "" on
+	"kcolorchooser" "" on
+	"kdeconnect" "" on
+	"kdegraphics-thumbnailers" "" on
+	"kdenetwork-filesharing" "" on
+	"kdesdk-thumbnailers" "" on
+	"kdialog" "" on
+	"kfind" "" on
+	"kio-extras" "" on
+	"kio-gdrive" "" on
+	"kolourpaint" "" on
+	"konsole" "" on
+	"ksystemlog" "" on
+	"ktouch" "" on
+	"lokalize" "" on
+	"okular" "" on
+	"print-manager" "" on
+	"spectacle" "" on
+	"kdiskmark" "" on
+	"packagekit-qt5" "" on
+	"latte-dock" "" off
+	"kvantum-qt5" "" off
+	"latte-dock-git" "(AUR)" off
+	"lightlyshaders-git" "(AUR)" off
+	"lightly-git" "(AUR)" off
+	"plasma5-applets-virtual-desktop-bar-git" "(AUR)" off
+	"sddm-conf-git" "(AUR)" off
+)
 
-# for wayland settings -> /arch-de-setup/config/wayland.sh(?)
+sel=$(dialog --backtitle "$apptitle" --title "KDE/Plasma :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
+	"${options[@]}" \
+	3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+	exit 1
+fi
 
-systemctl enable sddm
+for itm in $sel; do
+	case $itm in
+	# "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"latte-dock-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"lightlyshaders-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"lightly-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"plasma5-applets-virtual-desktop-bar-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"sddm-conf-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
+	esac
+done
+
+instpkg "$pkg" "$aurpkg"
+
+exit 0

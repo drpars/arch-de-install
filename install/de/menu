@@ -22,14 +22,10 @@ case $sel in
 	script install/de/hypr
 	;;
 "KDE/Plasma")
-	clear
 	script install/de/plasma
-	pressanykey
 	;;
 "Gnome")
-	clear
 	script install/de/gnome
-	pressanykey
 	;;
 esac
 

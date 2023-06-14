@@ -1,10 +1,73 @@
 #!/bin/bash
+#!/bin/bash
+. ./lib
 
-sudo pacman -S --needed --noconfirm baobab eog evince file-roller gdm gedit gnome-backgrounds gnome-calculator gnome-calendar gnome-characters gnome-color-manager gnome-control-center gnome-disk-utility gnome-font-viewer gnome-keyring gnome-logs gnome-menus gnome-photos gnome-remote-desktop gnome-session gnome-settings-daemon gnome-shell gnome-shell-extensions  gnome-terminal gnome-software gnome-themes-extra gnome-user-docs gnome-user-share grilo-plugins mutter nautilus sushi tracker tracker3-miners tracker-miners xdg-user-dirs-gtk
+options=()
+options+=(
+	"baobab" "" on
+	"eog" "" on
+	"evince" "" on
+	"file-roller" "" on
+	"gedit" "" on
+	"gnome-backgrounds" "" on
+	"gnome-calculator" "" on
+	"gnome-calendar" "" on
+	"gnome-characters" "" on
+	"gnome-color-manager" "" on
+	"gnome-control-center" "" on
+	"gnome-disk-utility" "" on
+	"gnome-font-viewer" "" on
+	"gnome-keyring" "" on
+	"gnome-logs" "" on
+	"gnome-menus" "" on
+	"gnome-photos" "" on
+	"gnome-remote-desktop" "" on
+	"gnome-session" "" on
+	"gnome-settings-daemon" "" on
+	"gnome-shell" "" on
+	"gnome-shell-extensions" "" on
+	"gnome-terminal" "" on
+	"gnome-software" "" on
+	"gnome-themes-extra" "" on
+	"gnome-user-docs" "" on
+	"gnome-user-share" "" on
+	"grilo-plugins" "" on
+	"mutter" "" on
+	"nautilus" "" on
+	"sushi" "" on
+	"tracker" "" on
+	"tracker3-miners" "" on
+	"tracker-miners" "" on
+	"xdg-user-dirs-gtk" "" on
+	"gnome-tweaks" "" on
+	"gnome-sudoku" "" on
+	"gnome-sound-recorder" "" on
+	"gnome-nettool" "" on
+	"gnome-mines" "" on
+	"gnome-mahjongg" "" on
+	"gnome-chess" "" on
+	"ghex" "" on
+	"gnome-software-packagekit-plugin" "" on
+	"packagekit" "" on
+)
 
-sudo pacman -S --needed --noconfirm gnome-tweaks gnome-sudoku gnome-sound-recorder gnome-nettool gnome-mines gnome-mahjongg gnome-chess ghex
-sudo pacman -S --needed --noconfirm gnome-software-packagekit-plugin packagekit
+sel=$(dialog --backtitle "$apptitle" --title "Gnome :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
+	"${options[@]}" \
+	3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+	exit 1
+fi
+
+for itm in $sel; do
+	case $itm in
+	# "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
+	esac
+done
+
+instpkg "$pkg" "$aurpkg"
 
 #for forced wayland support (gdm 42 rc version)
 #sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
-sudo systemctl enable gdm.service
+
+exit 0

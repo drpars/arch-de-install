@@ -56,7 +56,7 @@ done
 instpkg "$pkg" "$aurpkg"
 
 # remove other xdg-desktop-portal
-if (confirm "Do you want to remove other xdg-desktop-portal \n "); then
+if (confirm "Do you want to remove other xdg-desktop-portal implementations \n "); then
 	sudo pacman -R xdg-desktop-portal-gnome xdg-desktop-portal-gtk
 fi
 

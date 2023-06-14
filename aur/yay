@@ -1,11 +1,13 @@
 #!/bin/bash
 . ./lib
 
-# Yay
-clear
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-cd ..
-sudo rm -rf yay
-pressanykey
+if (confirm "Do you wanto install yay ?"); then
+	# Yay
+	clear
+	git clone https://aur.archlinux.org/yay.git
+	cd yay
+	makepkg -si
+	cd ..
+	sudo rm -rf yay
+	pressanykey
+fi

@@ -3,11 +3,12 @@
 
 options=()
 options+=(
-	"Applications" ""
+	"Apps" ""
   "Fonts" ""
   "Themes" ""
 	"Drivers" ""
 	"Desktop Environment" ""
+  "Display Manager" ""
 )
 
 defaultitem=""
@@ -20,11 +21,12 @@ fi
 sed i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
 
 case $sel in
-"Applications") menu install/apps/menu ;;
+"Apps") menu install/apps/menu ;;
 "Fonts") script install/fonts/fonts ;;
 "Themes") script install/themes/themes ;;
 "Drivers") menu install/drivers/menu ;;
 "Desktop Environment") menu install/de/menu ;;
+"Display Manager") menu install/displaymngr/menu ;;
 esac
 
 exit 0

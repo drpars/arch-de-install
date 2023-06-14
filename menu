@@ -4,8 +4,9 @@
 options=()
 options+=(
 	"Aur" ""
+	"Update" ""
 	"Install" ""
-  "Config" ""
+	"Config" ""
 	"Shutdown" ""
 )
 
@@ -19,6 +20,7 @@ fi
 sed i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
 
 case $sel in
+"Update") menu update/menu ;;
 "Aur") menu aur/menu ;;
 "Install") menu install/menu ;;
 "Config") menu config/menu ;;

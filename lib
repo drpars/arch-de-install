@@ -59,8 +59,8 @@ menu() {
 
 # $1: path
 script() {
-  require $1 755
-  $cachedir/$1
+	require $1 755
+	$cachedir/$1
 }
 
 # $1 : message
@@ -69,11 +69,27 @@ confirm() {
 	dialog --backtitle "$apptitle" $2 --yesno "$1" 0 0
 }
 message() {
-  dialog --backtitle "$apptitle" $2 --msgbox "$1" 0 0
+	dialog --backtitle "$apptitle" $2 --msgbox "$1" 0 0
 }
 
 pressanykey() {
 	read -n1 -p "Press any key to continue."
+}
+
+# $1 : servicename
+# $2 : [displayname]
+svcenable() {
+	if [ "$2" = "" ]; then
+		displayname="$1"
+	else
+		displayname="$2 ($1)"
+	fi
+	if (confirm "Start $displayname service at boot ?\n\nsystemctl enable $1"); then
+		clear
+		echo "systemctl enable $1"
+		systemctl enable $1
+		pressanykey
+	fi
 }
 
 # $1: pacman packages

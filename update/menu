@@ -1,0 +1,63 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+	"Upgrade" "pacman -Syu"
+	"Clean orphan" "pacman -Rns \$(pacman -Qqtd)"
+	"Clean cache" "pacman -Sc"
+	"" ""
+	"Edit pacman.conf" ""
+	"Edit mirrorlist" ""
+	"" ""
+	"Update keyring" "pacman -S archlinux-keyring"
+	"Refresh pacman keys" "pacman-key --refresh-keys"
+	"" ""
+)
+
+if [ -f /var/lib/pacman/db.lck ]; then
+	options+=(
+		"Remove db.lck" "rm /var/lib/pacman/db.lck"
+		"" ""
+	)
+fi
+
+sel=$(dialog --backtitle "$apptitle" --title "Updates Menu :" --cancel-button "Back" --menu "" 0 0 0 \
+	"${options[@]}" \
+	3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+	exit 1
+fi
+
+case $sel in
+"Upgrade")
+	clear
+	sudo pacman -Syu
+	;;
+"Clean orphan")
+  clear
+	sudo pacman -Rns $(pacman -Qqtd)
+	;;
+"Clean cache")
+  clear
+	sudo pacman -Sc
+	;;
+"Edit pacman.conf")
+  clear
+	sudo nvim /etc/pacman.conf
+	;;
+"Update keyring")
+  clear
+	sudo pacman -S archlinux-keyring
+	;;
+"Refresh pacman keys")
+  clear
+	sudo pacman-key --refresh-keys
+	;;
+"Remove db.lck")
+  clear
+	sudo rm /var/lib/pacman/db.lck
+	;;
+esac
+
+exit 0

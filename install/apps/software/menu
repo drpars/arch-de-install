@@ -21,10 +21,10 @@ fi
 sed -i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
 
 case $sel in
-"Console") script install/software/console ;;
-"Generic") script install/software/generic ;;
-"Programming Language") script install/software/prglng ;;
-"Others") script install/software/others ;;
+"Console") script install/apps/software/console ;;
+"Generic") script install/apps/software/generic ;;
+"Programming Language") script install/apps/software/prglng ;;
+"Others") script install/apps/software/others ;;
 esac
 
 exit 0

@@ -45,7 +45,12 @@ case $sel in
 	fi
 	;;
 "Sddm settings")
+	message "Script will open neovim editor. \nTo quit press ":q""
+	nvim config/sddm
+	if (confirm "Do you want to apply sddm script ?"); then
+		clear
 		script config/sddm
+		pressanykey
 	fi
 	;;
 "Copy dotfiles")

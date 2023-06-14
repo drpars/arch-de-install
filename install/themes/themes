@@ -16,36 +16,45 @@ fi
 
 case $sel in
 "Catppuccin-GTK-Theme")
-	# Catppuccin - GTK
-  clear
-	git clone https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme
-	mv Catppuccin-GTK-Theme/themes ~/.themes
-	rm -rf Catppuccin-GTK-Theme/
-  pressanykey
-  menu install/themes/themes
+	message "This is an autoscript. \nIf you confirm will start installation."
+	if (confirm "Do you want to start installation ?"); then
+		# Catppuccin - GTK
+		clear
+		git clone https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme
+		mv Catppuccin-GTK-Theme/themes ~/.themes
+		rm -rf Catppuccin-GTK-Theme/
+		pressanykey
+	fi
+	menu install/themes/themes
 	;;
 "Qogir-icon-theme")
-	# Qogir icon
-  clear
-	git clone https://github.com/vinceliuice/Qogir-icon-theme
-	cd Qogir-icon-theme
-	./install.sh
-	cd ..
-	rm -rf Qogir-icon-theme
-  pressanykey
-  menu install/themes/themes
+	message "This is an autoscript. \nIf you confirm will start installation."
+	if (confirm "Do you want to start installation ?"); then
+		# Qogir icon
+		clear
+		git clone https://github.com/vinceliuice/Qogir-icon-theme
+		cd Qogir-icon-theme
+		./install.sh
+		cd ..
+		rm -rf Qogir-icon-theme
+		pressanykey
+	fi
+	menu install/themes/themes
 	;;
 "Mocu-xcursor")
-	# Mocu cursor
-  clear
-	git clone https://github.com/sevmeyer/mocu-xcursor
-	cd mocu-xcursor
-	./make.sh
-	sudo cp -r $DIR/mocu-xcursor/dist/Mocu-White-Right /usr/share/icons
-	cd ..
-	rm -rf mocu-xcursor
-  pressanykey
-  menu install/themes/themes
+	message "This is an autoscript. \nIf you confirm will start installation."
+	if (confirm "Do you want to start installation ?"); then
+		# Mocu cursor
+		clear
+		git clone https://github.com/sevmeyer/mocu-xcursor
+		cd mocu-xcursor
+		./make.sh
+		sudo cp -r $DIR/mocu-xcursor/dist/Mocu-White-Right /usr/share/icons
+		cd ..
+		rm -rf mocu-xcursor
+		pressanykey
+	fi
+	menu install/themes/themes
 	;;
 esac
 

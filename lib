@@ -68,7 +68,6 @@ script() {
 confirm() {
 	dialog --backtitle "$apptitle" $2 --yesno "$1" 0 0
 }
-
 message() {
   dialog --backtitle "$apptitle" $2 --msgbox "$1" 0 0
 }

@@ -17,12 +17,12 @@ fi
 case $sel in
 "Reboot")
 	if (confirm "Reboot now ?" --defaultno); then
-		reboot
+		sudo reboot
 	fi
 	;;
 "Shutdown")
 	if (confirm "Shutdown now ?" --defaultno); then
-		shutdown now
+		sudo shutdown now
 	fi
 	;;
 esac

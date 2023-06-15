@@ -7,7 +7,9 @@ options+=(
 	"Disk settings" ""
 	"Hibernation settings" ""
 	"Sddm settings" ""
-	"Copy dotfiles" "Hyprland"
+	"Neovim Config" ""
+	"Remove Neovim" ""
+	"Dotfiles" "Hyprland"
 )
 sel=$(dialog --backtitle "$apptitle" --title "Settings :" --cancel-button "Back" --menu "" 0 0 0 \
 	"${options[@]}" \
@@ -53,7 +55,25 @@ case $sel in
 		pressanykey
 	fi
 	;;
-"Copy dotfiles")
+"Neovim Config")
+	if (confirm "Do you want to copy nvim config ? \n "); then
+		clear
+		script config/nvim
+		pressanykey
+	else
+		message "Nothing copied \n "
+	fi
+	;;
+"Remove Neovim")
+	if (confirm "Do you want to remove nvim ? \n "); then
+		clear
+		rm -rf ~/.config/nvim
+		rm -rf ~/.local/share/nvim
+		rm -rf ~/.cache/nvim
+		message "Neovim removed. \n "
+	fi
+	;;
+"Dotfiles")
 	if (confirm "Do you want to copy all dotfiles ? \n "); then
 		clear
 		script config/hypr-dot

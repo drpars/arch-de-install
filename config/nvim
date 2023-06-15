@@ -1,0 +1,4 @@
+#!/bin/bash
+. ./lib
+
+git clone https://gitlab.com/drpars/nvim.git ~/.config/nvim

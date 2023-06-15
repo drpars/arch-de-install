@@ -4,12 +4,18 @@
 options=()
 options+=(
 	"libva" "" on
-	"nvidia-525xx-dkms" "(AUR)" on
-	"nvidia-525xx-utils" "(AUR)" on
-	"lib32-nvidia-525xx-utils" "(AUR)" on
-	"opencl-nvidia-525xx" "(AUR)" on
-	"lib32-opencl-nvidia-525xx" "(AUR)" on
-	"nvidia-525xx-settings" "(AUR)" on
+	# "nvidia-525xx-dkms" "(AUR)" on
+	# "nvidia-525xx-utils" "(AUR)" on
+	# "lib32-nvidia-525xx-utils" "(AUR)" on
+	# "opencl-nvidia-525xx" "(AUR)" on
+	# "lib32-opencl-nvidia-525xx" "(AUR)" on
+	# "nvidia-525xx-settings" "(AUR)" on
+	"nvidia-open-dkms" "" on
+	"nvidia-utils" "" on
+	"lib32-nvidia-utils" "" on
+	"opencl-nvidia" "" on
+	"lib32-opencl-nvidia" "" on
+	"nvidia-settings" "" on
 	"libva-nvidia-driver-git" "(AUR)" on
 )
 sel=$(dialog --backtitle "$apptitle" --title "Nvidia for wayland :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
@@ -22,12 +28,12 @@ fi
 for itm in $sel; do
 	case $itm in
 	# "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-	"nvidia-525xx-dkms") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-	"nvidia-525xx-utils") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-	"lib32-nvidia-525xx-utils") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-	"opencl-nvidia-525xx") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-	"lib32-opencl-nvidia-525xx") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-	"nvidia-525xx-settings") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	# "nvidia-525xx-dkms") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	# "nvidia-525xx-utils") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	# "lib32-nvidia-525xx-utils") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	# "opencl-nvidia-525xx") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	# "lib32-opencl-nvidia-525xx") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	# "nvidia-525xx-settings") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	"libva-nvidia-driver-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
 	esac

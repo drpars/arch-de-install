@@ -7,8 +7,8 @@ options+=(
 	"Disk settings" ""
 	"Hibernation settings" ""
 	"Sddm settings" ""
-	"Neovim Config" ""
-	"Remove Neovim" ""
+	"Neovim configs" ""
+	"Remove neovim configs" ""
 	"Dotfiles" "Hyprland"
 )
 sel=$(dialog --backtitle "$apptitle" --title "Settings :" --cancel-button "Back" --menu "" 0 0 0 \
@@ -55,16 +55,16 @@ case $sel in
 		pressanykey
 	fi
 	;;
-"Neovim Config")
+"Neovim configs")
 	if (confirm "Do you want to copy nvim config ? \n "); then
 		clear
 		script config/nvim
-		pressanykey
+    message "Nvim config files are copied. \n "
 	else
 		message "Nothing copied \n "
 	fi
 	;;
-"Remove Neovim")
+"Remove neovim configs")
 	if (confirm "Do you want to remove nvim ? \n "); then
 		clear
 		rm -rf ~/.config/nvim

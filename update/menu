@@ -3,6 +3,8 @@
 
 options=()
 options+=(
+	"Aur" ""
+  "" ""
 	"Upgrade" "pacman -Syu"
 	"Clean orphan" "pacman -Rns \$(pacman -Qqtd)"
 	"Clean cache" "pacman -Sc"
@@ -30,6 +32,9 @@ if [ ! "$?" = "0" ]; then
 fi
 
 case $sel in
+"Aur") 
+  menu update/aur/menu 
+  ;;
 "Upgrade")
 	clear
 	sudo pacman -Syu

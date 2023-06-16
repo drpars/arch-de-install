@@ -2,7 +2,7 @@
 . ./lib
 
 echo "Copying dotfiles..."
-git clone https://gitlab.com/drpars/dotfiles.git
+git clone https://github.com/drpars/dotfiles.git
 # hypr
 cp -r $DIR/dotfiles/config/wayland/{hypr,mako,scripts,swaylock,waybar,wlogout,wofi} $DIRUSER/.config/
 # user files

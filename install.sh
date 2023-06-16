@@ -2,9 +2,10 @@
 . ./lib
 
 if [ ! -f /usr/bin/dialog ]; then
+  message "Dialog isn't already installed."
 	sudo pacman -S --needed --noconfirm dialog
 else
-	echo "dialog is already present..."
+	message "dialog is already present..."
 fi
 
 # create temporary files

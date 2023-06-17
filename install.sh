@@ -2,7 +2,7 @@
 . ./lib
 
 if [ ! -f /usr/bin/dialog ]; then
-	sudo pacman -S --needed --noconfirm dialog
+	instpkg dialog
 fi
 
 # create cache files

@@ -9,8 +9,8 @@ cp -r $DIR/dotfiles/config/wayland/{hypr,mako,scripts,swaylock,waybar,wlogout,wo
 cp $DIR/dotfiles/.zshrc $DIRUSER/
 cp $DIR/dotfiles/.gtkrc-2.0 $DIRUSER/
 # ~/.config
-cp $DIR/dotfiles/config/kdeglobals $DIRUSER/.config/
-cp -r $DIR/dotfiles/config/{btop,gtk-3.0,imv,kitty,mc,Mousepad,nwg-look,qt5ct,Thunar,xfce4,xsettingsd} $DIRUSER/.config/
+cp $DIR/dotfiles/config/* $DIRUSER/.config/
+cp -r $DIR/dotfiles/config/{btop,gtk-3.0,imv,kitty,mc,Mousepad,nwg-look,qt5ct,qt6ct,Thunar,xfce4,xsettingsd} $DIRUSER/.config/
 cp $DIR/dotfiles/scripts/* $DIRUSER/.config/scripts/
 # make executable scripts files
 chmod +x $DIRUSER/.config/scripts/*

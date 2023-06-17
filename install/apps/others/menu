@@ -14,9 +14,12 @@ fi
 
 case $sel in
 "Virt Manager")
-	message "This is an autoscript. \nIf you confirm will start installation."
+	message "Script will open neovim editor. \nTo quit press ":q""
+	nvim install/apps/others/vm
+	# message "This is an autoscript. \nIf you confirm will start installation."
 	if (confirm "Do you want to start Virt manager installation"); then
-		script install/others/vm
+    clear
+		script install/apps/others/vm
 	fi
 	;;
 esac

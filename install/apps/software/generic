@@ -8,6 +8,7 @@ options+=(
 	"thunar-archive-plugin" "" on
 	"dolphin" "" on
 	"dolphin-plugins" "" on
+	"kdenetwork-filesharing" "" on
 	"krusader" "" on
 	"tumbler" "" on
 	"ffmpegthumbs" "" on
@@ -15,7 +16,7 @@ options+=(
 	"mousepad" "" on
 	"piper" "" on
 	"steam" "" on
-  "heroic-games-launcher-bin" "" on
+	"heroic-games-launcher-bin" "" on
 	"isomaster" "(AUR)" off
 	"startup-settings-git" "(AUR)" off
 )

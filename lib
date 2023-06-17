@@ -97,7 +97,7 @@ svcenable() {
 instpkg() {
 	if [ ! "$1" = "" ]; then
 		clear
-		echo "# pacman -S --needed $1"
+		echo "# sudo pacman -S --needed $1"
 		sudo pacman -S --needed $1
 		pressanykey
 	fi

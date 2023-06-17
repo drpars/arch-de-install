@@ -15,6 +15,7 @@ options+=(
 	"mousepad" "" on
 	"piper" "" on
 	"steam" "" on
+  "heroic-games-launcher-bin" "" on
 	"isomaster" "(AUR)" off
 	"startup-settings-git" "(AUR)" off
 )
@@ -29,6 +30,7 @@ for itm in $sel; do
 	case $itm in
 	"isomaster") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	"startup-settings-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"heroic-games-launcher-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
 	esac
 done

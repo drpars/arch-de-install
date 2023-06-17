@@ -3,11 +3,9 @@
 
 if [ ! -f /usr/bin/dialog ]; then
 	sudo pacman -S --needed --noconfirm dialog
-else
-	message "dialog is already present..."
 fi
 
-# create temporary files
+# create cache files
 rm -r $cachedir
 mkdir $cachedir
 cp -r $workdir/* $cachedir/
@@ -17,3 +15,4 @@ chmod 755 lib
 ./lib --root
 # delete cache directory
 rm -r $cachedir
+clear

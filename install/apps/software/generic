@@ -16,7 +16,7 @@ options+=(
 	"mousepad" "" on
 	"piper" "" on
 	"steam" "" on
-	"heroic-games-launcher-bin" "" on
+  "heroic-games-launcher-bin" "(AUR)" on
 	"isomaster" "(AUR)" off
 	"startup-settings-git" "(AUR)" off
 )

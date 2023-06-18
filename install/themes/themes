@@ -16,8 +16,8 @@ fi
 
 case $sel in
 "Catppuccin-GTK-Theme")
-	message "This is an autoscript. \nIf you confirm installation will start."
-	if (confirm "Do you want to start installation ?"); then
+	message "This is an autoscript. \nIf you confirm, installation will start. \n "
+	if (confirm "Do you want to start installation ? \n "); then
 		# Catppuccin - GTK
 		clear
 		git clone https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme
@@ -27,8 +27,8 @@ case $sel in
 	menu install/themes/themes
 	;;
 "Qogir-icon-theme")
-	message "This is an autoscript. \nIf you confirm installation will start."
-	if (confirm "Do you want to start installation ?"); then
+	message "This is an autoscript. \nIf you confirm, installation will start. \n "
+	if (confirm "Do you want to start installation ? \n "); then
 		# Qogir icon
 		clear
 		git clone https://github.com/vinceliuice/Qogir-icon-theme
@@ -40,8 +40,8 @@ case $sel in
 	menu install/themes/themes
 	;;
 "Mocu-xcursor")
-	message "This is an autoscript. \nIf you confirm installation will start."
-	if (confirm "Do you want to start installation ?"); then
+	message "This is an autoscript. \nIf you confirm, installation will start. \n "
+	if (confirm "Do you want to start installation ? \n "); then
 		# Mocu cursor
 		clear
 		git clone https://github.com/sevmeyer/mocu-xcursor

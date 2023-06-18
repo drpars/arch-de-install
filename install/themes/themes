@@ -22,7 +22,6 @@ case $sel in
 		clear
 		git clone https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme
 		mv Catppuccin-GTK-Theme/themes ~/.themes
-		rm -rf Catppuccin-GTK-Theme/
 		pressanykey
 	fi
 	menu install/themes/themes
@@ -36,7 +35,6 @@ case $sel in
 		cd Qogir-icon-theme
 		./install.sh
 		cd ..
-		rm -rf Qogir-icon-theme
 		pressanykey
 	fi
 	menu install/themes/themes
@@ -51,7 +49,6 @@ case $sel in
 		./make.sh
 		sudo cp -r $DIR/mocu-xcursor/dist/Mocu-White-Right /usr/share/icons
 		cd ..
-		rm -rf mocu-xcursor
 		pressanykey
 	fi
 	menu install/themes/themes

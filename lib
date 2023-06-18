@@ -87,8 +87,8 @@ svcenable() {
 	fi
 	if (confirm "Start $displayname service at boot ?\n\nsystemctl enable $1"); then
 		clear
-		echo "systemctl enable $1"
-		systemctl enable $1
+		echo "sudo systemctl enable $1"
+		sudo systemctl enable $1
 		pressanykey
 	fi
 }

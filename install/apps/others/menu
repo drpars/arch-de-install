@@ -17,7 +17,7 @@ case $sel in
 	message "Script will open neovim editor. \nTo quit press ":q""
 	nvim install/apps/others/vm
 	# message "This is an autoscript. \nIf you confirm will start installation."
-	if (confirm "Do you want to start Virt manager installation"); then
+	if (confirm "Do you want to start Virt manager installation \n "); then
     clear
 		script install/apps/others/vm
 	fi

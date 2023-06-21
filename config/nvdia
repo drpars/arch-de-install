@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# NVIDIA modules in mkinitcpio
+sudo sed -i "s/MODULES=()/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm kvm kvm_intel)/g" /etc/mkinitcpio.conf
+sudo mkinitcpio -P
+# Additional steps
+sudo echo -e "options nvidia-drm modeset=1" | sudo tee -a /etc/modprobe.d/nvidia.conf
+# Blacklist nouveau
+sudo echo -e "blacklist nouveau" | sudo tee -a /etc/modprobe.d/nouveau.conf
+

@@ -5,6 +5,7 @@ options=()
 options+=(
 	"Samba settings" ""
 	"Disk settings" ""
+  "NVIDIA settings" ""
 	"Hibernation settings" ""
 	"Sddm settings" ""
 	"Neovim configs" ""
@@ -34,6 +35,15 @@ case $sel in
 	if (confirm "Do you wanto apply disks script ?"); then
 		clear
 		script config/disks
+		pressanykey
+	fi
+	;;
+"NVIDIA settings")
+	message "Script will open neovim editor. \nTo quit press ":q""
+	nvim config/nvidia
+	if (confirm "Do you wanto apply nvidia script ?"); then
+		clear
+		script config/nvidia
 		pressanykey
 	fi
 	;;

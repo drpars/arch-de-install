@@ -7,6 +7,8 @@ Thank you MatMoul.
 [Original Link](https://github.com/MatMoul/archdi)
 
 ### Use
-`git clone https://github.com/drpars/arch-de-install.git` \
-`cd arch-de-install` \
-`./install.sh`
+```
+git clone https://github.com/drpars/arch-de-install.git \
+cd arch-de-install \
+./install.sh
+```

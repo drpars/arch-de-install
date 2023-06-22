@@ -3,7 +3,6 @@
 
 options=()
 options+=(
-	"Office" ""
 	"Internet" ""
   "Software" ""
 	"System" ""
@@ -22,7 +21,6 @@ fi
 sed -i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
 
 case $sel in
-"Office") script install/apps/office/office ;;
 "Internet") script install/apps/internet/net ;;
 "Software") menu install/apps/software/menu ;;
 "System") script install/apps/system/system ;;

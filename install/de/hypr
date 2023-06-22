@@ -22,7 +22,7 @@ options+=(
 	"polkit-kde-agent" "" on
 	"swww" "(AUR)" on
 	"swaylock-effects" "(AUR)" on
-	"swayidle" "(AUR)" on
+	"swayidle" "(AUR)" off
 	"wlogout" "(AUR)" on
 	"imv" "" on
 	"pamixer" "" on

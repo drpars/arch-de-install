@@ -6,6 +6,7 @@ options+=(
 	"cmatrix" "" on
 	"neofetch" "" on
   "mpv" "" on
+  "chafa" "" on
 	"mc" "" on
 	"mlocate" "" on
 	"fd" "" on
@@ -18,8 +19,8 @@ options+=(
 	"wl-clipboard" "" on
 	"zsh" "" on
 	"zsh-completions" "" on
-  " jq" "" on
-	"cava" "(AUR)" on
+  "jq" "" on
+	"cava" "(AUR)" off
 )
 sel=$(dialog --backtitle "$apptitle" --title "Console Applications :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
 	"${options[@]}" \

@@ -1,8 +1,12 @@
 #!/bin/bash
 . ./lib
 
+# Dependencies installer
 if [ ! -f /usr/bin/dialog ]; then
 	instpkg dialog
+  if [ ! -f /usr/bin/nvim ];then
+    instpkg neovim
+  fi
 fi
 
 # create cache files

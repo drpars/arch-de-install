@@ -5,3 +5,10 @@ A few years ago, I was able to do the first archlinux installation with the arch
 
 Thank you MatMoul.
 [Original Link](https://github.com/MatMoul/archdi)
+
+### Use
+```
+git clone https://github.com/drpars/arch-de-install.git
+cd arch-de-install
+./install.sh
+```

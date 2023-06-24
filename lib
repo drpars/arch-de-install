@@ -63,6 +63,10 @@ script() {
 	require $1 755
 	$cachedir/$1
 }
+sscript() {
+	require $1 755
+	sudo $cachedir/$1
+}
 
 # $1 : message
 # $2 : args

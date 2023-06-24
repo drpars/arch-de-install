@@ -4,6 +4,7 @@
 options=()
 options+=(
 	"Time & keymap settings" ""
+	"Disable wifi powersave" ""
 	"Samba settings" ""
 	"Disk settings" ""
 	"NVIDIA settings" ""
@@ -21,6 +22,9 @@ if [ ! "$?" = "0" ]; then
 fi
 
 case $sel in
+"Disable wifi powersave")
+	script config/wifipower
+	;;
 "Time & keymap settings")
 	clear
 	printf "%s\n" "" "sudo timedatectl set-local-rtc 0" ""
@@ -32,6 +36,8 @@ case $sel in
 	printf "%s\n" "" "sudo localectl set-x11-keymap tr pc105" ""
 	sudo localectl set-x11-keymap tr pc105
 	pressanykey
+	sudo systemctl --user enable pipewire-pulse.service
+	sudo systemctl start fstrim.service
 	;;
 "Samba settings")
 	message "Script will open neovim editor. \nTo quit press ":q""

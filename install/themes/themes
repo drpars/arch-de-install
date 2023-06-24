@@ -24,7 +24,7 @@ case $sel in
 		mv Catppuccin-GTK-Theme/themes ~/.themes
 		pressanykey
 	fi
-	menu install/themes/themes
+	# menu install/themes/themes
 	;;
 "Qogir-icon-theme")
 	message "This is an autoscript. \nIf you confirm, installation will start. \n "

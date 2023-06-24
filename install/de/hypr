@@ -4,12 +4,14 @@
 options=()
 options+=(
 	"hyprland" "" off
-	"hyprland-nvidia" "(AUR)" on
+	"hyprland-nvidia" "(AUR)" off
+  "hyprland-nvidia-git" "(AUR)" off
 	"qt5ct" "" on
 	"qt5-wayland" "" on
 	"qt6ct" "" on
 	"qt6-wayland" "" on
-	"waybar-hyprland-git" "(AUR)" on
+  "waybar" "" on
+	"waybar-hyprland-git" "(AUR)" off
 	"nwg-look-bin" "(AUR)" on
 	"kitty" "" on
 	"wofi" "" on
@@ -43,6 +45,7 @@ for itm in $sel; do
 	case $itm in
 	# "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	"hyprland-nvidia") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  "hyprland-nvidia-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	"waybar-hyprland-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	"nwg-look-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	"swww") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;

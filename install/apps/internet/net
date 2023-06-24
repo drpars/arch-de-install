@@ -23,6 +23,7 @@ fi
 for itm in $sel; do
 	case $itm in
 	"firefox-i18n") pkg=$pkg ;;
+	"thunderbird-i18n") pkg=$pkg ;;
 	"webapp-manager") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
 	esac
@@ -33,6 +34,7 @@ instpkg "$pkg" "$aurpkg"
 for itm in $sel; do
 	case $itm in
 	"firefox-i18n") choosepkg "firefox-i18n-" ;;
+	"thunderbird-i18n") choosepkg "thunderbird-i18n-" ;;
 	esac
 done
 

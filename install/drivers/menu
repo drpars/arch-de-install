@@ -22,7 +22,9 @@ case $sel in
 	;;
 "Mkinitcpio firmware")
   if (confirm "Do you want to install firmware ? \n "); then
+		clear
 		yay -S --noconfirm mkinitcpio-firmware
+		pressanykey
   fi
 	;;
 esac

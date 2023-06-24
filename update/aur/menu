@@ -15,8 +15,8 @@ if [ ! "$?" = "0" ]; then
 fi
 
 case $sel in
-Yay) script aur/yay ;;
-Paru) script aur/paru ;;
+Yay) script update/aur/yay ;;
+Paru) script update/aur/paru ;;
 esac
 
 exit 0

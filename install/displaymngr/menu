@@ -29,7 +29,7 @@ case $sel in
 	svcenable sddm
 	;;
 "sddm-git")
-	instpkg sddm-git
+	instpkg "" sddm-git
 	svcenable sddm
 	;;
 "lxdm")

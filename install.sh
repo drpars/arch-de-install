@@ -18,5 +18,5 @@ chmod 755 lib
 # run installer
 ./lib --root
 # delete cache directory
-rm -r $cachedir
+rm -rf $cachedir
 clear

@@ -106,19 +106,21 @@ instpkg() {
 		sudo pacman -S --needed $1
 		pressanykey
 	fi
-	if [ -f /usr/bin/yay ]; then
-		clear
-		echo "# sudo -u $USER yay -S --needed $2"
-		sudo -u $USER yay -S --needed $2
-		pressanykey
-	else
-		if [ -f /usr/bin/paru ]; then
+	if [ ! "$2" = "" ]; then
+		if [ -f /usr/bin/yay ]; then
 			clear
-			echo "# sudo -u $USER paru -S --needed $2"
-			sudo -u $USER paru -S --needed $2
+			echo "# sudo -u $USER yay -S --needed $2"
+			sudo -u $USER yay -S --needed $2
 			pressanykey
 		else
-			echo "To install AUR packages, you need to install an aurhelper in Aur Helper menu !"
+			if [ -f /usr/bin/paru ]; then
+				clear
+				echo "# sudo -u $USER paru -S --needed $2"
+				sudo -u $USER paru -S --needed $2
+				pressanykey
+			else
+				echo "To install AUR packages, you need to install an aurhelper in Aur Helper menu !"
+			fi
 		fi
 	fi
 }

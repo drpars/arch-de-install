@@ -3,9 +3,10 @@
 
 options=()
 options+=(
+	"Time & keymap settings" ""
 	"Samba settings" ""
 	"Disk settings" ""
-  "NVIDIA settings" ""
+	"NVIDIA settings" ""
 	"Hibernation settings" ""
 	"Sddm settings" ""
 	"Neovim configs" ""
@@ -20,6 +21,18 @@ if [ ! "$?" = "0" ]; then
 fi
 
 case $sel in
+"Time & keymap settings")
+	clear
+	printf "%s\n" "" "sudo timedatectl set-local-rtc 0" ""
+	sudo timedatectl set-local-rtc 0
+	pressanykey
+	printf "%s\n" "" "sudo timedatectl set-ntp true" ""
+	sudo timedatectl set-ntp true
+	pressanykey
+	printf "%s\n" "" "sudo localectl set-x11-keymap tr pc105" ""
+	sudo localectl set-x11-keymap tr pc105
+	pressanykey
+	;;
 "Samba settings")
 	message "Script will open neovim editor. \nTo quit press ":q""
 	nvim config/samba
@@ -69,7 +82,7 @@ case $sel in
 	if (confirm "Do you want to copy nvim config ? \n "); then
 		clear
 		script config/nvim
-    message "Nvim config files are copied. \n "
+		message "Nvim config files are copied. \n "
 	else
 		message "Nothing copied \n "
 	fi

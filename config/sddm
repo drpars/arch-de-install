@@ -19,7 +19,7 @@ if [ -f /usr/bin/sddm ]; then
 	fi
 else
 	message "Sddm not installed. \nFirst install sddm!"
-  if (confirm "Do you want to jump Display Manager installation ? \n ")
+  if (confirm "Do you want to jump Display Manager installation ? \n "); then
     menu install/displaymngr/menu
   fi
 fi

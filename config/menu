@@ -49,7 +49,7 @@ case $sel in
 	;;
 "Hibernation settings")
 	message "Script will open neovim editor. \nTo quit press ":q""
-	nvim config/disks
+	nvim config/hibernation
 	if (confirm "Do you want to apply hibernation script ?"); then
 		clear
 		script config/hibernation

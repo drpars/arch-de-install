@@ -3,56 +3,27 @@
 
 options=()
 options+=(
-	"Catppuccin-GTK-Theme" ""
-	"Qogir-icon-theme" ""
-	"Mocu-xcursor" ""
+	"catppuccin-gtk-theme-mocha" "(AUR)" on
+	"qogir-icon-theme" "(AUR)" on
+	"mocu-xcursor" "(AUR)" on
 )
-sel=$(dialog --backtitle "$apptitle" --title "Themes :" --cancel-button "Back" --menu "Choose what you want" 0 0 0 \
+sel=$(dialog --backtitle "$apptitle" --title "Themes :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
 	"${options[@]}" \
 	3>&1 1>&2 2>&3)
 if [ ! "$?" = "0" ]; then
 	exit 1
 fi
 
-case $sel in
-"Catppuccin-GTK-Theme")
-	message "This is an autoscript. \nIf you confirm, installation will start. \n "
-	if (confirm "Do you want to start installation ? \n "); then
-		# Catppuccin - GTK
-		clear
-		git clone https://github.com/Fausto-Korpsvart/Catppuccin-GTK-Theme
-		mv Catppuccin-GTK-Theme/themes ~/.themes
-		pressanykey
-	fi
-	# menu install/themes/themes
-	;;
-"Qogir-icon-theme")
-	message "This is an autoscript. \nIf you confirm, installation will start. \n "
-	if (confirm "Do you want to start installation ? \n "); then
-		# Qogir icon
-		clear
-		git clone https://github.com/vinceliuice/Qogir-icon-theme
-		cd Qogir-icon-theme
-		./install.sh
-		cd ..
-		pressanykey
-	fi
-	menu install/themes/themes
-	;;
-"Mocu-xcursor")
-	message "This is an autoscript. \nIf you confirm, installation will start. \n "
-	if (confirm "Do you want to start installation ? \n "); then
-		# Mocu cursor
-		clear
-		git clone https://github.com/sevmeyer/mocu-xcursor
-		cd mocu-xcursor
-		./make.sh
-		sudo cp -r $DIR/mocu-xcursor/dist/Mocu-White-Right /usr/share/icons
-		cd ..
-		pressanykey
-	fi
-	menu install/themes/themes
-	;;
-esac
+for itm in $sel; do
+	case $itm in
+	# "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"catppuccin-gtk-theme-mocha") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"qogir-icon-theme") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"mocu-xcursor") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
+	esac
+done
+
+instpkg "$pkg" "$aurpkg"
 
 exit 0

@@ -1,0 +1,33 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+	"asusctl" "(AUR)" on
+	"supergfxctl" "(AUR)" on
+	"rog-control-center" "(AUR)" on
+)
+sel=$(dialog --backtitle "$apptitle" --title "Asus Rog Strix :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
+	"${options[@]}" \
+	3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+	exit 1
+fi
+
+for itm in $sel; do
+	case $itm in
+	# "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"asusctl") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"supergfxctl") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"rog-control-center") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
+	esac
+done
+
+instpkg "$pkg" "$aurpkg"
+
+if [ -f /usr/bin/supergfxctl ]; then
+	svcenable supergfxctl
+fi
+
+exit 0

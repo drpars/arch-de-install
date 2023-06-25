@@ -4,11 +4,12 @@
 options=()
 options+=(
 	"Apps" ""
-  "Fonts" ""
-  "Themes" ""
+	"Fonts" ""
+	"Themes" ""
 	"Drivers" ""
 	"Desktop Environment" ""
-  "Display Manager" ""
+	"Display Manager" ""
+	"Asus Rog Strix" ""
 )
 
 defaultitem=""
@@ -27,6 +28,7 @@ case $sel in
 "Drivers") menu install/drivers/menu ;;
 "Desktop Environment") menu install/de/menu ;;
 "Display Manager") menu install/displaymngr/menu ;;
+"Asus Rog Strix") menu install/asus/menu ;;
 esac
 
 exit 0

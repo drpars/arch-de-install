@@ -36,7 +36,7 @@ case $sel in
 	printf "%s\n" "" "sudo localectl set-x11-keymap tr pc105" ""
 	sudo localectl set-x11-keymap tr pc105
 	pressanykey
-	sudo systemctl --user enable pipewire-pulse.service
+	# sudo systemctl --user enable pipewire-pulse.service
 	sudo systemctl start fstrim.service
 	;;
 "Samba settings")

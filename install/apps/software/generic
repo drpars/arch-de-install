@@ -15,6 +15,9 @@ options+=(
 	"tumbler" "" on
 	"ffmpegthumbs" "" on
 	"file-roller" "" on
+	"smplayer" "" on
+	"smplayer-skins" "" on
+	"smplayer-themes" "" on
 	"mousepad" "" on
 	"piper" "" on
 	"steam" "" on

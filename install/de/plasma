@@ -39,6 +39,7 @@ options+=(
 	"lightlyshaders-git" "(AUR)" off
 	"lightly-git" "(AUR)" off
 	"plasma5-applets-virtual-desktop-bar-git" "(AUR)" off
+  "plasma5-applets-window-appmenu-git" "(AUR)" off
 	"sddm-conf-git" "(AUR)" off
 )
 
@@ -56,6 +57,7 @@ for itm in $sel; do
 	"lightlyshaders-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	"lightly-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	"plasma5-applets-virtual-desktop-bar-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"plasma5-applets-window-appmenu-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	"sddm-conf-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
 	esac

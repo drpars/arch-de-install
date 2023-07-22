@@ -4,12 +4,11 @@ veri=$(lsblk -dno UUID /dev/sdd1)
 data=$(lsblk -dno UUID /dev/sdc1)
 
 if [ ! -d /mnt/Veri ]; then
-  sudo mkdir /mnt/Veri
+	sudo mkdir /mnt/Veri
 elif [ ! -d /mnt/Data ]; then
-  sudo mkdir /mnt/Data
+	sudo mkdir /mnt/Data
 else
-  echo "Veri and Data folders are already exist..."
+	echo "Veri and Data folders are already exist..."
 fi
 
-printf "%s\n" "" "# NTFS disks" "UUID=$veri  /mnt/Veri ntfs  defaults,rw,errors=remount-ro,uid=1000  0 0" "UUID=$data  /mnt/Data ntfs  defaults,rw,errors=remount-ro,uid=1000  0 0" | sudo tee -a /etc/fstab 
-
+printf "%s\n" "" "# NTFS disks" "UUID=$veri  /mnt/Veri ntfs  defaults,rw,errors=remount-ro,uid=1000  0 0" "UUID=$data  /mnt/Data ntfs  defaults,rw,errors=remount-ro,uid=1000  0 0" | sudo tee -a /etc/fstab

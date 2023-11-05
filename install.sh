@@ -3,8 +3,8 @@
 
 # Dependencies installer
 if [ ! -f /usr/bin/dialog ]; then
-	instpkg dialog
-  if [ ! -f /usr/bin/nvim ];then
+  instpkg dialog
+  if [ ! -f /usr/bin/nvim ]; then
     instpkg neovim
   fi
 fi

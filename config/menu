@@ -3,124 +3,124 @@
 
 options=()
 options+=(
-	"Time & keymap settings" ""
-	"Disable wifi powersave" ""
-	"Samba settings" ""
-	"Disk settings" ""
-	"NVIDIA settings" ""
-	"Hibernation settings" ""
-	"Sddm settings" ""
-	"Neovim configs" ""
-	"Remove neovim configs" ""
-	"Dotfiles" "Hyprland"
-  "Dotfiles-SolDoesTech" "HyprV4" 
+  "Time & keymap settings" ""
+  "Disable wifi powersave" ""
+  "Samba settings" ""
+  "Disk settings" ""
+  "NVIDIA settings" ""
+  "Hibernation settings" ""
+  "Sddm settings" ""
+  "Neovim configs" ""
+  "Remove neovim configs" ""
+  "Dotfiles" "Hyprland"
+  "Dotfiles-SolDoesTech" "HyprV4"
 )
 sel=$(dialog --backtitle "$apptitle" --title "Settings :" --cancel-button "Back" --menu "" 0 0 0 \
-	"${options[@]}" \
-	3>&1 1>&2 2>&3)
+  "${options[@]}" \
+  3>&1 1>&2 2>&3)
 if [ ! "$?" = "0" ]; then
-	exit 1
+  exit 1
 fi
 
 case $sel in
 "Disable wifi powersave")
-	script config/wifipower
-	;;
+  script config/wifipower
+  ;;
 "Time & keymap settings")
-	clear
-	printf "%s\n" "" "sudo timedatectl set-local-rtc 0" ""
-	sudo timedatectl set-local-rtc 0
-	pressanykey
-	printf "%s\n" "" "sudo timedatectl set-ntp true" ""
-	sudo timedatectl set-ntp true
-	pressanykey
-	printf "%s\n" "" "sudo localectl set-x11-keymap tr pc105" ""
-	sudo localectl set-x11-keymap tr pc105
-	pressanykey
-	# sudo systemctl --user enable pipewire-pulse.service
-	sudo systemctl start fstrim.service
-	;;
+  clear
+  printf "%s\n" "" "sudo timedatectl set-local-rtc 0" ""
+  sudo timedatectl set-local-rtc 0
+  pressanykey
+  printf "%s\n" "" "sudo timedatectl set-ntp true" ""
+  sudo timedatectl set-ntp true
+  pressanykey
+  printf "%s\n" "" "sudo localectl set-x11-keymap tr pc105" ""
+  sudo localectl set-x11-keymap tr pc105
+  pressanykey
+  # sudo systemctl --user enable pipewire-pulse.service
+  sudo systemctl start fstrim.service
+  ;;
 "Samba settings")
-	message "Script will open neovim editor. \nTo quit press ":q""
-	nvim config/samba
-	if (confirm "Do you want to apply samba script ?"); then
-		clear
-		script config/samba
-		pressanykey
-	fi
-	;;
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/samba
+  if (confirm "Do you want to apply samba script ?"); then
+    clear
+    script config/samba
+    pressanykey
+  fi
+  ;;
 "Disk settings")
-	message "Script will open neovim editor. \nTo quit press ":q""
-	nvim config/disks
-	if (confirm "Do you wanto apply disks script ?"); then
-		clear
-		script config/disks
-		pressanykey
-	fi
-	;;
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/disks
+  if (confirm "Do you wanto apply disks script ?"); then
+    clear
+    script config/disks
+    pressanykey
+  fi
+  ;;
 "NVIDIA settings")
-	message "Script will open neovim editor. \nTo quit press ":q""
-	nvim config/nvidia
-	if (confirm "Do you wanto apply nvidia script ?"); then
-		clear
-		script config/nvidia
-		pressanykey
-	fi
-	;;
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/nvidia
+  if (confirm "Do you wanto apply nvidia script ?"); then
+    clear
+    script config/nvidia
+    pressanykey
+  fi
+  ;;
 "Hibernation settings")
-	message "Script will open neovim editor. \nTo quit press ":q""
-	nvim config/hibernation
-	if (confirm "Do you want to apply hibernation script ?"); then
-		clear
-		srscript config/hibernation
-		pressanykey
-	fi
-	;;
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/hibernation
+  if (confirm "Do you want to apply hibernation script ?"); then
+    clear
+    srscript config/hibernation
+    pressanykey
+  fi
+  ;;
 "Sddm settings")
-	message "Script will open neovim editor. \nTo quit press ":q""
-	nvim config/sddm
-	if (confirm "Do you want to apply sddm script ?"); then
-		clear
-		script config/sddm
-		pressanykey
-	fi
-	;;
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/sddm
+  if (confirm "Do you want to apply sddm script ?"); then
+    clear
+    script config/sddm
+    pressanykey
+  fi
+  ;;
 "Neovim configs")
-	if (confirm "Do you want to copy nvim config ? \n "); then
-		clear
-		script config/nvim
-		message "Nvim config files are copied. \n "
-	else
-		message "Nothing copied \n "
-	fi
-	;;
+  if (confirm "Do you want to copy nvim config ? \n "); then
+    clear
+    script config/nvim
+    message "Nvim config files are copied. \n "
+  else
+    message "Nothing copied \n "
+  fi
+  ;;
 "Remove neovim configs")
-	if (confirm "Do you want to remove nvim ? \n "); then
-		clear
-		rm -rf ~/.config/nvim
-		rm -rf ~/.local/share/nvim
-		rm -rf ~/.cache/nvim
-		message "Neovim removed. \n "
-	fi
-	;;
+  if (confirm "Do you want to remove nvim ? \n "); then
+    clear
+    rm -rf ~/.config/nvim
+    rm -rf ~/.local/share/nvim
+    rm -rf ~/.cache/nvim
+    message "Neovim removed. \n "
+  fi
+  ;;
 "Dotfiles")
-	if (confirm "Do you want to copy all dotfiles ? \n "); then
-		clear
-		script config/hypr-dot
-		pressanykey
-	else
-		message "Nothing copied \n "
-	fi
-	;;
+  if (confirm "Do you want to copy all dotfiles ? \n "); then
+    clear
+    script config/hypr-dot
+    pressanykey
+  else
+    message "Nothing copied \n "
+  fi
+  ;;
 "Dotfiles-SolDoesTech")
-	if (confirm "Do you want to copy HyprV4-SolDoesTech dotfiles ? \n "); then
-		clear
-		script config/hyprv4
-		pressanykey
-	else
-		message "Nothing copied \n "
-	fi
-	;;
+  if (confirm "Do you want to copy HyprV4-SolDoesTech dotfiles ? \n "); then
+    clear
+    script config/hyprv4
+    pressanykey
+  else
+    message "Nothing copied \n "
+  fi
+  ;;
 esac
 
 exit 0

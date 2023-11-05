@@ -71,7 +71,7 @@ case $sel in
 	nvim config/hibernation
 	if (confirm "Do you want to apply hibernation script ?"); then
 		clear
-		sscript config/hibernation
+		srscript config/hibernation
 		pressanykey
 	fi
 	;;

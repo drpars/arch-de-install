@@ -6,6 +6,7 @@ options+=(
 	"asusctl" "(AUR)" on
 	"supergfxctl" "(AUR)" on
 	"rog-control-center" "(AUR)" on
+  "brightnessctl" "" on
 )
 sel=$(dialog --backtitle "$apptitle" --title "Asus Rog Strix :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
 	"${options[@]}" \

@@ -3,7 +3,7 @@
 
 echo "Copying dotfiles..."
 if [ ! -d $cachedir/dotfiles ]; then
-	git clone https://github.com/drpars/dotfiles.git
+  git clone https://github.com/drpars/dotfiles.git
 fi
 # hypr
 cp -r $cachedir/dotfiles/config/wayland/{hypr,mako,scripts,swaylock,waybar,wlogout,wofi} $DIRUSER/.config/

@@ -13,6 +13,7 @@ options+=(
 	"Neovim configs" ""
 	"Remove neovim configs" ""
 	"Dotfiles" "Hyprland"
+  "Dotfiles-SolDoesTech" "HyprV4" 
 )
 sel=$(dialog --backtitle "$apptitle" --title "Settings :" --cancel-button "Back" --menu "" 0 0 0 \
 	"${options[@]}" \
@@ -106,6 +107,15 @@ case $sel in
 	if (confirm "Do you want to copy all dotfiles ? \n "); then
 		clear
 		script config/hypr-dot
+		pressanykey
+	else
+		message "Nothing copied \n "
+	fi
+	;;
+"Dotfiles-SolDoesTech")
+	if (confirm "Do you want to copy HyprV4-SolDoesTech dotfiles ? \n "); then
+		clear
+		script config/hyprv4
 		pressanykey
 	else
 		message "Nothing copied \n "

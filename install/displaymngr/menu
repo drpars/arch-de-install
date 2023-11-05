@@ -3,47 +3,47 @@
 
 options=()
 options+=(
-	"gdm" "Gnome Login"
-	"sddm" "QT5 Login"
-	"sddm-git" "(AUR)"
-	"lxdm" "LXDE Login"
-	"lightdm-gtk-greeter" "Other Login"
+  "gdm" "Gnome Login"
+  "sddm" "QT5 Login"
+  "sddm-git" "(AUR)"
+  "lxdm" "LXDE Login"
+  "lightdm-gtk-greeter" "Other Login"
 )
 
 defaultitem=""
 sel=$(dialog --backtitle "$apptitle" --title "Display Manager Menu :" --default-item "$defaultitem" --cancel-button "Back" --menu "" 0 0 0 \
-	"${options[@]}" \
-	3>&1 1>&2 2>&3)
+  "${options[@]}" \
+  3>&1 1>&2 2>&3)
 if [ ! "$?" = "0" ]; then
-	exit 1
+  exit 1
 fi
 sed -i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
 
 case $sel in
 "gdm")
-	instpkg gdm
-	svcenable gdm
-	;;
+  instpkg gdm
+  svcenable gdm
+  ;;
 "sddm")
-	instpkg sddm
-	svcenable sddm
-	;;
+  instpkg sddm
+  svcenable sddm
+  ;;
 "sddm-git")
-	instpkg "" sddm-git
-	svcenable sddm
-	;;
+  instpkg "" sddm-git
+  svcenable sddm
+  ;;
 "lxdm")
-	instpkg lxdm
-	svcenable lxdm
-	;;
+  instpkg lxdm
+  svcenable lxdm
+  ;;
 "lightdm-gtk-greeter")
-	instpkg lightdm-gtk-greeter
-	svcenable lightdm
-	;;
+  instpkg lightdm-gtk-greeter
+  svcenable lightdm
+  ;;
 "lightdm-kde-greeter")
-	instpkg lightdm-kde-greeter
-	svcenable lightdm
-	;;
+  instpkg lightdm-kde-greeter
+  svcenable lightdm
+  ;;
 esac
 
 exit 0

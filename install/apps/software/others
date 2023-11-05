@@ -3,7 +3,7 @@
 
 options=()
 options+=(
-	"lightly-git" "(AUR)" on
+	"lightly-git" "(AUR)" off
 	"gtk-engine-murrine" "" on
 	"qt5-graphicaleffects" "" on
 	"qt5-quickcontrols2" "" on

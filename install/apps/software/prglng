@@ -24,6 +24,7 @@ options+=(
 	"composer" "" on
 	"php" "" on
 	"julia" "" on
+  "jq" "" on
 	"cpanminus" "" on
 )
 sel=$(dialog --backtitle "$apptitle" --title "Programming Language :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \

@@ -1,0 +1,58 @@
+#!/bin/bash
+. ./lib
+
+Hyprland-JaKooLit
+
+### Copy Config Files ###
+set -e # Exit immediately if a command exits with a non-zero status.
+
+printf "${NOTE} copying dotfiles\n"
+for DIR in btop cava dunst foot hypr swappy swaylock waybar wofi; do
+  DIRPATH=~/.config/$DIR
+  if [ -d "$DIRPATH" ]; then
+    echo -e "${NOTE} - Config for $DIR found, attempting to back up."
+    mv $DIRPATH $DIRPATH-back-up 2>&1 | tee -a "$LOG"
+    echo -e "${NOTE} - Backed up $DIR to $DIRPATH-back-up."
+  fi
+done
+
+for DIRw in wallpapers; do
+  DIRPATH=~/Pictures/$DIRw
+  if [ -d "$DIRPATH" ]; then
+    echo -e "${NOTE} - wallpapers in $DIRw found, attempting to back up."
+    mv $DIRPATH $DIRPATH-back-up 2>&1 | tee -a "$LOG"
+    echo -e "${NOTE} - Backed up $DIRw to $DIRPATH-back-up."
+  fi
+done
+
+# Copying config files
+printf " Copying config files...\n"
+mkdir -p ~/.config
+cp -r config/* ~/.config/ && { echo "${OK}Copy completed!"; } || {
+  echo "${ERROR} Failed to copy config files."
+  exit 1
+} 2>&1 | tee -a "$LOG"
+
+# copying Wallpapers
+mkdir -p ~/Pictures/wallpapers
+cp -r wallpapers ~/Pictures/ && { echo "${OK}Copy completed!"; } || {
+  echo "${ERROR} Failed to copy wallpapers."
+  exit 1
+} 2>&1 | tee -a "$LOG"
+
+# Initial Symlinks to avoid errors
+# symlinks for waybar
+ln -sf "$HOME/.config/waybar/configs/config-default" "$HOME/.config/waybar/config" &&
+  ln -sf "$HOME/.config/waybar/style/style-dark.css" "$HOME/.config/waybar/style.css" &&
+
+  # symlinks for dunst
+  ln -sf "$HOME/.config/dunst/styles/dunstrc-dark" "$HOME/.config/dunst/dunstrc" &&
+  # symlink for wofi
+  ln -sf "$HOME/.config/wofi/styles/style-dark.css" "$HOME/.config/wofi/style.css" &&
+  ln -sf "$HOME/.config/wofi/configs/config-default" "$HOME/.config/wofi/config" &&
+
+  # Set some files as executable
+  chmod +x ~/.config/hypr/scripts/* 2>&1 | tee -a "$LOG"
+
+printf "\n${OK} Copy Completed!\n\n"
+printf "${NOTE} Highly recommended to logout and re-login\n\n"

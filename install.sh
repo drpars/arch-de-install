@@ -14,9 +14,9 @@ rm -r $cachedir
 mkdir $cachedir
 cp -r $workdir/* $cachedir/
 # execute installer
-chmod 755 lib
+chmod 755 $cachedir/lib
 # run installer
-./lib --root
+sh $cachedir/lib --root
 # delete cache directory
 rm -rf $cachedir
 clear

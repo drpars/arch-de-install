@@ -11,7 +11,7 @@ if [[ $CFG =~ ^[Yy] ]]; then
   echo -e "Copying config files..."
 
   # copy the HyprV directory
-  cp -R $cachedir/HyprV4-SolDoesTech/HyprV ~/.config/
+  cp -R $cachedir/dotfiles/HyprV4-SolDoesTech/HyprV ~/.config/
 
   #set the measuring unit
   echo -e "Attempring to set mesuring unit..."

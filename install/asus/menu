@@ -28,7 +28,7 @@ done
 instpkg "$pkg" "$aurpkg"
 
 if [ -f /usr/bin/supergfxctl ]; then
-	svcenable supergfxctl
+	svcenable supergfxd
 fi
 
 exit 0

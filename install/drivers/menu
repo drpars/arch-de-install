@@ -3,30 +3,32 @@
 
 options=()
 options+=(
-	"Nvidia driver" ""
-	"Mkinitcpio firmware" ""
+  "Nvidia driver" ""
+  "Sound" ""
+  "Mkinitcpio firmware" ""
 )
 
 defaultitem=""
 sel=$(dialog --backtitle "$apptitle" --title "Drivers :" --default-item "$defultitem" --cancel-button "Back" --menu "" 0 0 0 \
-	"${options[@]}" \
-	3>&1 1>&2 2>&3)
+  "${options[@]}" \
+  3>&1 1>&2 2>&3)
 if [ ! "$?" = "0" ]; then
-	exit 1
+  exit 1
 fi
 sed i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
 
 case $sel in
 "Nvidia driver")
-	menu install/drivers/nvidia
-	;;
+  menu install/drivers/nvidia
+  ;;
+"Sound") script install/drivers/sound ;;
 "Mkinitcpio firmware")
   if (confirm "Do you want to install firmware ? \n "); then
-		clear
-		yay -S --noconfirm mkinitcpio-firmware
-		pressanykey
+    clear
+    yay -S --noconfirm mkinitcpio-firmware
+    pressanykey
   fi
-	;;
+  ;;
 esac
 
 exit 0

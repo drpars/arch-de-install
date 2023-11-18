@@ -4,11 +4,11 @@
 options=()
 options+=(
 	# java
-	"jre-openjdk-headless" "" on
-	"jre-openjdk" "" on
-	"jdk-openjdk" "" on
-	"openjdk-doc" "" on
-	"openjdk-src" "" on
+	"jre-openjdk-headless" "" off
+	"jre-openjdk" "" off
+	"jdk-openjdk" "" off
+	"openjdk-doc" "" off
+	"openjdk-src" "" off
 	# Python
 	"python" "" on
 	"python-pip" "" on

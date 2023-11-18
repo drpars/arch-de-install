@@ -4,10 +4,10 @@
 options=()
 options+=(
 	"gst-plugins-base" "" on
-	"gst-plugins-goo" "" on
+	"gst-plugins-good" "" on
   "gst-plugins-ugly" "" on
   "gst-plugins-bad" "" on
-	"gst-plugins-pipewire" "" on
+	"gst-plugin-pipewire" "" on
 	"gst-libav" "" on
 	"libde265" "" on
 )

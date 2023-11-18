@@ -11,7 +11,7 @@ fi
 
 # create cache files
 rm -r $cachedir
-mkdir $cachedir
+mkdir -p $cachedir
 cp -r $workdir/* $cachedir/
 # execute installer
 chmod 755 $cachedir/lib

@@ -3,6 +3,8 @@
 part1=$(lsblk -dno PARTUUID /dev/nvme0n1p3)
 part2=$(findmnt -no UUID -T /swapfile)
 part3=$(filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}')
+part4=$(cat /etc/kernel/cmdline)
+hbrnation="$part4 resume=UUID=$part2 resume_offset=$part3"
+printf "%s" "$hbrnation" | sudo tee /etc/kernel/cmdline
 
-sed -i 's/root=LABEL=Root/root=LABEL=Root resume=UUID=$part2 resume_offset=$part3/g' /etc/kernel/cmdline
-sudo mkinitcpio -P
+mkinitcpio -P

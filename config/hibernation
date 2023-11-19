@@ -4,4 +4,5 @@ part1=$(lsblk -dno PARTUUID /dev/nvme0n1p3)
 part2=$(findmnt -no UUID -T /swapfile)
 part3=$(filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}')
 
-# printf "%s\n" "title   Arch Linux" "linux   /vmlinuz-linux-zen" "initrd  /intel-ucode.img" "initrd  /initramfs-linux-zen.img" "options root=PARTUUID=$part1 rw rootfstype=ext4 systemd.unit=graphical.target nvidia-drm.modeset=1 resume=UUID=$part2 resume_offset=$part3" | sudo tee /boot/loader/entries/arch.conf
+sed -i 's/root=LABEL=Root/root=LABEL=Root resume=UUID=$part2 resume_offset=$part3/g' /etc/kernel/cmdline
+sudo mkinitcpio -P

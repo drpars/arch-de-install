@@ -51,7 +51,7 @@ case $sel in
 "Disk settings")
   message "Script will open neovim editor. \nTo quit press ":q""
   nvim config/disks
-  if (confirm "Do you wanto apply disks script ?"); then
+  if (confirm "Do you want to apply disks script ?"); then
     clear
     script config/disks
     pressanykey
@@ -88,7 +88,6 @@ case $sel in
   if (confirm "Do you want to copy nvim config ? \n "); then
     clear
     script config/nvim
-    message "Nvim config files are copied. \n "
   else
     message "Nothing copied \n "
   fi

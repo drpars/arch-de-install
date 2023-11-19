@@ -10,8 +10,8 @@ cp -r $cachedir/dotfiles/config/wayland/{hypr,mako,scripts,swaylock,waybar,wlogo
 # user files
 cp $cachedir/dotfiles/.zshrc $DIRUSER/
 # ~/.config
-cp $cachedir/dotfiles/config/* $DIRUSER/.config/
-cp -r $cachedir/dotfiles/config/{btop,imv,kitty,mc,Mousepad,qt5ct,qt6ct,Thunar,xfce4} $DIRUSER/.config/
+cp $cachedir/dotfiles/config/krusaderrc $DIRUSER/.config/
+cp -r $cachedir/dotfiles/config/{btop,imv,kitty,mc,Mousepad} $DIRUSER/.config/
 cp $cachedir/dotfiles/scripts/* $DIRUSER/.config/scripts/
 # make executable scripts files
 chmod +x $DIRUSER/.config/scripts/*

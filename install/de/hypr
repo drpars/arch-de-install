@@ -14,6 +14,7 @@ options+=(
   "cliphist" "" on
   "waybar" "" on
   "waybar-hyprland-git" "(AUR)" off
+  "wttrbar" "(AUR)" on
   "nwg-look-bin" "(AUR)" on
   "lxappearance" "" off
   "kitty" "" on
@@ -52,6 +53,7 @@ for itm in $sel; do
   "hyprland-nvidia") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "hyprland-nvidia-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "waybar-hyprland-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  "wttrbar") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "nwg-look-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "swww") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "swaylock-effects") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;

@@ -12,8 +12,9 @@ options+=(
   "qt6-wayland" "" on
   "gtk3" "" on
   "cliphist" "" on
-  "waybar" "" on
-  "waybar-hyprland-git" "(AUR)" off
+  "waybar" "" off
+  "waybar-hyprland-git" "(AUR)" on
+  "waybar-updates" "(AUR)" on
   "wttrbar" "(AUR)" on
   "nwg-look-bin" "(AUR)" on
   "lxappearance" "" off
@@ -53,6 +54,7 @@ for itm in $sel; do
   "hyprland-nvidia") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "hyprland-nvidia-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "waybar-hyprland-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  "waybar-updates") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "wttrbar") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "nwg-look-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "swww") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;

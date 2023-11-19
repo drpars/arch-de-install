@@ -1,0 +1,38 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+  "gvfs" "" on
+  "gvfs-mtp" "" on
+  "gvfs-smb" "" on
+  "gvfs-nfs" "" on
+)
+sel=$(dialog --backtitle "$apptitle" --title "Console Applications :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
+  "${options[@]}" \
+  3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+  exit 1
+fi
+
+for itm in $sel; do
+  case $itm in
+  # "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  *) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
+  esac
+done
+
+instpkg "$pkg" "$aurpkg"
+
+if [ -f /usr/bin/zsh ]; then
+  clear
+  # ohmyzsh
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  # zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  # zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  pressanykey
+fi
+
+exit 0

@@ -6,6 +6,7 @@ options+=(
 	"Console" ""
 	"Generic" ""
 	"Xorg" ""
+  "File System" ""
 	"Multimedia" ""
 	"Printer" ""
   "Programming Language" ""
@@ -27,6 +28,7 @@ case $sel in
 "Console") script install/apps/software/console ;;
 "Generic") script install/apps/software/generic ;;
 "Xorg") script install/apps/software/xorg ;;
+"File System") script install/apps/software/filesystem ;;
 "Multimedia") script install/apps/software/multimedia ;;
 "Printer") script install/apps/software/printer ;;
 "Programming Language") script install/apps/software/prglng ;;

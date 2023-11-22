@@ -13,7 +13,8 @@ options+=(
   "gtk3" "" on
   "cliphist" "" on
   "waybar" "" off
-  "waybar-hyprland-git" "(AUR)" on
+  "waybar-hyprland" "" on
+  "waybar-hyprland-git" "(AUR)" off
   "waybar-updates" "(AUR)" on
   "wttrbar" "(AUR)" on
   "nwg-look-bin" "(AUR)" on
@@ -53,6 +54,7 @@ for itm in $sel; do
   # "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "hyprland-nvidia") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "hyprland-nvidia-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  "waybar-hyprland") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "waybar-hyprland-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "waybar-updates") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "wttrbar") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;

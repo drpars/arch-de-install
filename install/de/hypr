@@ -13,7 +13,7 @@ options+=(
   "gtk3" "" on
   "cliphist" "" on
   "waybar" "" off
-  "waybar-hyprland" "" on
+  "waybar-hyprland" "AUR" on
   "waybar-hyprland-git" "(AUR)" off
   "waybar-updates" "(AUR)" on
   "wttrbar" "(AUR)" on

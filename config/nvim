@@ -5,7 +5,7 @@ git clone https://github.com/drpars/nvim.git ~/.config/nvim
 message "Nvim config files are copied. \n "
 
 if (confirm "Also do you want to set nvim for root"); then
-  if [ -d /root/.config/nvim ]; then
+  if [ ! -d /root/.config/nvim ]; then
     sudo mkdir -p /root/.config/nvim
   fi
   sudo ln -sf $DIRUSER/.config/nvim/* /root/.config/nvim

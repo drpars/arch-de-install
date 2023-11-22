@@ -1,7 +1,15 @@
 #!/bin/bash
 
+vendr=$(cat /proc/cpuinfo | grep "vendor_id" | uniq | awk '/vendor_id/{print $3}')
+
+if [[ $vendr == "GenuineIntel" ]]; then
+  cputype="intel"
+elif [[ $vendr == "AuthenticAMD" ]]; then
+  cputype="amd"
+fi
+
 # NVIDIA modules in mkinitcpio
-sudo sed -i "s/MODULES=()/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm kvm)/g" /etc/mkinitcpio.conf
+sudo sed -i "s/MODULES=()/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm kvm kvm_$cputype)/g" /etc/mkinitcpio.conf
 sudo mkinitcpio -P
 # Additional steps
 sudo echo -e "options nvidia-drm modeset=1" | sudo tee -a /etc/modprobe.d/nvidia.conf

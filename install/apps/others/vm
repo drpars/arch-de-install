@@ -1,13 +1,21 @@
 #!/bin/bash
 . ./lib
 
+vendr=$(cat /proc/cpuinfo | grep "vendor_id" | uniq | awk '/vendor_id/{print $3}')
+
+if [[ $vendr == "GenuineIntel" ]]; then
+  cputype="intel"
+elif [[ $vendr == "AuthenticAMD" ]]; then
+  cputype="amd"
+fi
+
 # bridge-utils?
 sudo pacman -S --needed libvirt qemu-full iptables-nft dnsmasq openbsd-netcat dmidecode virt-manager libguestfs edk2-ovmf libvirt-python
 sudo usermod -a -G libvirt $USER
 
 # printf "%s\n" "LIBVIRTD_ARGS=\"--listen\"" "listen_tls = 0" "listen_tcp = 1" "auth_tcp=\"none\"" | sudo tee -a /etc/libvirt/libvirtd.conf
 printf "%s\n" "" "hosts: files libvirt libvirt_guest dns $HOST_NAME" | sudo tee -a /etc/nsswitch.conf
-printf "%s\n" "options kvm_intel nested=1" | sudo tee -a /etc/modprobe.d/kvm_intel.conf
+printf "%s\n" "options kvm_$cputype nested=1" | sudo tee -a /etc/modprobe.d/kvm_$cputype.conf
 
 printf "%s\n" "" "# User Settings" "user = \"$USER\"" "group = \"$USER\"" | sudo tee -a /etc/libvirt/qemu.conf
 

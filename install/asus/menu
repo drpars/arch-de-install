@@ -29,6 +29,7 @@ instpkg "$pkg" "$aurpkg"
 
 if [ -f /usr/bin/supergfxctl ]; then
 	svcenable supergfxd
+  svcenable power-profiles-daemon.service
 fi
 
 exit 0

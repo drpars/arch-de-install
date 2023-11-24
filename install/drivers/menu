@@ -4,6 +4,7 @@
 options=()
 options+=(
   "Nvidia driver" ""
+  "Amd GPU" ""
   "Sound" ""
   "Mkinitcpio firmware" ""
 )
@@ -21,6 +22,7 @@ case $sel in
 "Nvidia driver")
   menu install/drivers/nvidia
   ;;
+"Amd GPU") script install/drivers/amdgpu ;;
 "Sound") script install/drivers/sound ;;
 "Mkinitcpio firmware")
   if (confirm "Do you want to install firmware ? \n "); then

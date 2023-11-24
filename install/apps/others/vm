@@ -1,7 +1,7 @@
 #!/bin/bash
 . ./lib
 
-vendr=$(cat /proc/cpuinfo | grep "vendor_id" | uniq | awk '/vendor_id/{print $3}')
+vendr=$(cat /proc/cpuinfo | awk '/vendor_id/{print $3}' | uniq)
 
 if [[ $vendr == "GenuineIntel" ]]; then
   cputype="intel"

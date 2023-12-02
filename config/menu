@@ -26,18 +26,12 @@ case $sel in
   script config/wifipower
   ;;
 "Time & keymap settings")
-  clear
-  printf "%s\n" "" "sudo timedatectl set-local-rtc 0" ""
-  sudo timedatectl set-local-rtc 0
-  pressanykey
-  printf "%s\n" "" "sudo timedatectl set-ntp true" ""
-  sudo timedatectl set-ntp true
-  pressanykey
-  printf "%s\n" "" "sudo localectl set-x11-keymap tr pc105" ""
-  sudo localectl set-x11-keymap tr pc105
-  pressanykey
-  # sudo systemctl --user enable pipewire-pulse.service
-  sudo systemctl start fstrim.service
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/time
+  if (confirm "Do you want to apply time script ?"); then
+    clear
+    script config/time
+    pressanykey
   ;;
 "Samba settings")
   message "Script will open neovim editor. \nTo quit press ":q""

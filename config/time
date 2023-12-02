@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Time
+clear
+printf "%s\n" "" "sudo timedatectl set-local-rtc 0" ""
+sudo timedatectl set-local-rtc 0
+printf "%s\n" "" "sudo timedatectl set-ntp true" ""
+sudo timedatectl set-ntp true
+# Keyboard layout
+printf "%s\n" "" "sudo localectl set-x11-keymap tr pc105" ""
+sudo localectl set-x11-keymap tr pc105

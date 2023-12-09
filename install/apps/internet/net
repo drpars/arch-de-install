@@ -10,7 +10,8 @@ options+=(
 	"thunderbird-i18n" "" on
 	"wget" "" on
 	"uget" "" on
-	"transmission-gtk" "" on
+	"transmission-gtk" "" off
+	"transmission-qt" "" off
   "webapp-manager" "(AUR)" on
 )
 sel=$(dialog --backtitle "$apptitle" --title "Internet applications :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \

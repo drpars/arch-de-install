@@ -32,6 +32,7 @@ case $sel in
     clear
     script config/time
     pressanykey
+  fi
   ;;
 "Samba settings")
   message "Script will open neovim editor. \nTo quit press ":q""

@@ -1,15 +1,26 @@
 #!/bin/bash
+. ./lib
 
-vendr=$(cat /proc/cpuinfo | awk '/vendor_id/{print $3}' | uniq)
-
-if [[ $vendr == "GenuineIntel" ]]; then
-  cputype="intel"
-elif [[ $vendr == "AuthenticAMD" ]]; then
+if cat /proc/cpuinfo | awk '/model name/' | uniq | grep -i "amd";then
   cputype="amd"
 fi
+if cat /proc/cpuinfo | awk '/model name/' | uniq | grep -i "intel"; then
+  cputype="intel"
+fi
+
+if lspci | grep -E "(VGA|3D)" |  awk '/AMD/';then
+  gpumodule1="amdgpu radeon"
+else
+  gpumodule1=""
+fi
+
+if lspci | grep -E "(VGA|3D)" |  awk '/NVIDIA/';then
+  gpumodule2="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
+else
+gpumodule="$gpumodule1 $gpumodule2"
 
 # NVIDIA modules in mkinitcpio
-sudo sed -i "s/MODULES=()/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm kvm kvm_$cputype)/g" /etc/mkinitcpio.conf
+sudo sed -i "s/MODULES=()/MODULES=($gpumodule kvm kvm_$cputype)/g" /etc/mkinitcpio.conf
 sudo mkinitcpio -P
 # Additional steps
 sudo echo -e "options nvidia-drm modeset=1" | sudo tee -a /etc/modprobe.d/nvidia.conf

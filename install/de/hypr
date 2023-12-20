@@ -20,7 +20,8 @@ options+=(
   "nwg-look-bin" "(AUR)" on
   "lxappearance" "" off
   "kitty" "" on
-  "wofi" "" on
+  "wofi" "" off
+  "rofi" "" off
   "mako" "" on
   "swappy" "" on
   "grim" "" on

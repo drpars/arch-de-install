@@ -3,25 +3,24 @@
 
 options=()
 options+=(
-	"libreoffice-fresh" "" on
+	"libreoffice-fresh" "" off
 	"libreoffice-still" "" off
 	"thunar" "" off
 	"thunar-volman" "" off
 	"thunar-archive-plugin" "" off
 	"xfce4-settings" "" off
+	"tumbler" "" on
 	"dolphin" "" off
 	"dolphin-plugins" "" off
 	"kdenetwork-filesharing" "" off
 	"krusader" "" on
 	"krename" "" on
 	"kdiff3" "" on
-	"tumbler" "" off
 	"ffmpegthumbs" "" off
-	"file-roller" "" off
-	"smplayer" "" on
-	"smplayer-skins" "" on
-	"smplayer-themes" "" on
-	"mousepad" "" off
+	"smplayer" "" off
+	"smplayer-skins" "" off
+	"smplayer-themes" "" off
+	"mousepad" "" on
 	"piper" "" off
 	"steam" "" on
 	"heroic-games-launcher-bin" "(AUR)" on

@@ -3,10 +3,9 @@
 
 options=()
 options+=(
-  "cmatrix" "" on
+  "cmatrix" "" off
   "neofetch" "" on
   "mpv" "" on
-  "chafa" "" on
   "mc" "" on
   "mlocate" "" on
   "fd" "" on

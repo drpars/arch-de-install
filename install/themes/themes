@@ -3,7 +3,7 @@
 
 options=()
 options+=(
-	"catppuccin-gtk-theme-mocha" "(AUR)" on
+	"catppuccin-gtk-theme-mocha" "(AUR)" off
 	"qogir-icon-theme" "(AUR)" on
 	"mocu-xcursor" "(AUR)" on
 )

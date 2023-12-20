@@ -4,12 +4,9 @@
 options=()
 options+=(
 	"firefox" "" on
-	"firefox-i18n" "" on
-	"chromium" "" off
 	"thunderbird" "" on
-	"thunderbird-i18n" "" on
-	"wget" "" on
-	"uget" "" on
+	"wget" "" off
+	"uget" "" off
 	"transmission-gtk" "" off
 	"transmission-qt" "" off
   "webapp-manager" "(AUR)" on
@@ -22,20 +19,18 @@ if [ ! "$?" = "0" ]; then
 fi
 
 for itm in $sel; do
-	case $itm in
-	"firefox-i18n") pkg=$pkg ;;
-	"thunderbird-i18n") pkg=$pkg ;;
+  case $itm in
 	"webapp-manager") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
-	esac
+    *) pkg="$pkg $(echo $itm | sed 's/"//g')";;
+  esac
 done
 
 instpkg "$pkg" "$aurpkg"
 
 for itm in $sel; do
 	case $itm in
-	"firefox-i18n") choosepkg "firefox-i18n-" ;;
-	"thunderbird-i18n") choosepkg "thunderbird-i18n-" ;;
+	"firefox") choosepkg "firefox-i18n-" ;;
+	"thunderbird") choosepkg "thunderbird-i18n-" ;;
 	esac
 done
 

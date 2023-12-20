@@ -10,7 +10,7 @@ options+=(
 	"opencl-nvidia" "" on
 	"lib32-opencl-nvidia" "" on
 	"nvidia-settings" "" on
-	"libva-nvidia-driver-git" "(AUR)" on
+	"libva-nvidia-driver-git" "(AUR)" off
 )
 sel=$(dialog --backtitle "$apptitle" --title "Nvidia for wayland :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
 	"${options[@]}" \

@@ -1,23 +1,24 @@
 #!/bin/bash
 . ./lib
 
-vendr=$(cat /proc/cpuinfo | awk '/vendor_id/{print $3}' | uniq)
-
-if [[ $vendr == "GenuineIntel" ]]; then
-  cputype="intel"
-elif [[ $vendr == "AuthenticAMD" ]]; then
-  cputype="amd"
-fi
-
 # bridge-utils?
 sudo pacman -S --needed libvirt qemu-full iptables-nft dnsmasq openbsd-netcat dmidecode virt-manager libguestfs edk2-ovmf libvirt-python
 sudo usermod -a -G libvirt $USER
 
 # printf "%s\n" "LIBVIRTD_ARGS=\"--listen\"" "listen_tls = 0" "listen_tcp = 1" "auth_tcp=\"none\"" | sudo tee -a /etc/libvirt/libvirtd.conf
-printf "%s\n" "" "hosts: files libvirt libvirt_guest dns $HOST_NAME" | sudo tee -a /etc/nsswitch.conf
-printf "%s\n" "options kvm_$cputype nested=1" | sudo tee -a /etc/modprobe.d/kvm_$cputype.conf
-
-printf "%s\n" "" "# User Settings" "user = \"$USER\"" "group = \"$USER\"" | sudo tee -a /etc/libvirt/qemu.conf
+if cat /etc/nsswitch.conf | grep "$HOST_NAME"; then
+  echo "/etc/nsswitch.conf is already modified..."
+else
+  printf "%s\n" "" "hosts: files libvirt libvirt_guest dns $HOST_NAME" | sudo tee -a /etc/nsswitch.conf
+fi
+if [ ! -f /etc/modprobe.d/kvm_$cputype.conf ]; then
+  printf "%s\n" "options kvm_$cputype nested=1" | sudo tee -a /etc/modprobe.d/kvm_$cputype.conf
+fi
+if cat /etc/libvirt/qemu.conf | grep "$USER"; then
+  echo "/etc/libvirt/qemu.conf is already modified..."
+else
+  printf "%s\n" "" "# User Settings" "user = \"$USER\"" "group = \"$USER\"" | sudo tee -a /etc/libvirt/qemu.conf
+fi
 
 sudo systemctl enable libvirtd.service
 

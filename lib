@@ -16,6 +16,13 @@ DIRUSER=$(cd -P "$(dirname "$SRCE")" >/dev/null 2>&1 && cd && pwd)
 USER=$(whoami)
 HOST_NAME=$(cat /etc/hostname)
 
+if cat /proc/cpuinfo | awk '/model name/' | uniq | grep -i "amd"; then
+  cputype="amd"
+fi
+if cat /proc/cpuinfo | awk '/model name/' | uniq | grep -i "intel"; then
+  cputype="intel"
+fi
+
 apptitle="Arch Linux Installation"
 cachedir=$DIRUSER/.cache/arch-de-install
 workdir=$DIR

@@ -1,13 +1,6 @@
 #!/bin/bash
 . ./lib
 
-if cat /proc/cpuinfo | awk '/model name/' | uniq | grep -i "amd";then
-  cputype="amd"
-fi
-if cat /proc/cpuinfo | awk '/model name/' | uniq | grep -i "intel"; then
-  cputype="intel"
-fi
-
 if lspci | grep -E "(VGA|3D)" |  awk '/AMD/';then
   gpumodule1="amdgpu radeon"
 else

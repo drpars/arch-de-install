@@ -23,7 +23,13 @@ fi
 
 case $sel in
 "Disable wifi powersave")
-  script config/wifipower
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/wifipower
+  if (confirm "Do you want to apply time script ?"); then
+    clear
+    script config/wifipower
+    pressanykey
+  fi
   ;;
 "Time & keymap settings")
   message "Script will open neovim editor. \nTo quit press ":q""

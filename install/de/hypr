@@ -6,13 +6,13 @@ options+=(
   "hyprland" "" off
   "hyprland-git" "(AUR)" on
   "qt5ct" "" off
-  "gt5ct-kde" "(AUR)" on
+  "qt5ct-kde" "(AUR)" on
   "qt5-wayland" "" on
   "qt6ct" "" off
   "qt6-wayland" "" on
   "gtk3" "" on
   "cliphist" "" on
-  "waybar" "" off
+  "waybar" "" on
   "waybar-updates" "(AUR)" on
   "wttrbar" "(AUR)" off
   "nwg-look-bin" "(AUR)" off

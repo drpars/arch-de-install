@@ -4,23 +4,23 @@
 options=()
 options+=(
   "hyprland" "" off
-  "hyprland-nvidia" "(AUR)" on
-  "hyprland-nvidia-git" "(AUR)" off
-  "qt5ct" "" on
+  "hyprland-git" "(AUR)" on
+  "qt5ct" "" off
+  "gt5ct-kde" "(AUR)" on
   "qt5-wayland" "" on
-  "qt6ct" "" on
+  "qt6ct" "" off
   "qt6-wayland" "" on
   "gtk3" "" on
   "cliphist" "" on
   "waybar" "" off
-  "waybar-hyprland" "AUR" on
-  "waybar-hyprland-git" "(AUR)" off
   "waybar-updates" "(AUR)" on
-  "wttrbar" "(AUR)" on
-  "nwg-look-bin" "(AUR)" on
+  "wttrbar" "(AUR)" off
+  "nwg-look-bin" "(AUR)" off
   "lxappearance" "" off
+	"lightly-boehs-git" "(AUR)" off
+	"lightly-git" "(AUR)" on
   "kitty" "" on
-  "wofi" "" off
+  "wofi" "" on
   "rofi" "" off
   "mako" "" on
   "swappy" "" on
@@ -28,19 +28,19 @@ options+=(
   "slurp" "" on
   "swaybg" "" on
   "playerctl" "" on
-  "polkit-kde-agent" "" on
-  "polkit-gnome" "" off
+  "polkit-kde-agent" "" off
+  "polkit-gnome" "" on
   "swww" "(AUR)" on
   "swaylock-effects" "(AUR)" on
-  "swayidle" "(AUR)" off
+  "swayidle" "(AUR)" on
   "wlogout" "(AUR)" on
   "imv" "" on
   "pamixer" "" on
   "pavucontrol" "" on
   "blueman" "" on
-  "starship" "" on
-  "network-manager-applet" "" on
+  "iwgtk" "(AUR)" on
   "xdg-desktop-portal-hyprland" "" on
+  "xdg-desktop-portal-gtk" "" off
 )
 
 sel=$(dialog --backtitle "$apptitle" --title "Hyprland :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
@@ -53,27 +53,22 @@ fi
 for itm in $sel; do
   case $itm in
   # "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-  "hyprland-nvidia") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-  "hyprland-nvidia-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-  "waybar-hyprland") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-  "waybar-hyprland-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  "hyprland-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  "qt5ct-kde") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "waybar-updates") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "wttrbar") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "nwg-look-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"lightly-boehs-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"lightly-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "swww") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "swaylock-effects") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "swayidle") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "wlogout") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  "iwgtk") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   *) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
   esac
 done
 
 instpkg "$pkg" "$aurpkg"
-
-# remove other xdg-desktop-portal
-if (confirm "Do you want to remove other xdg-desktop-portal implementations \n "); then
-  clear
-  sudo pacman -R xdg-desktop-portal-gnome xdg-desktop-portal-gtk
-fi
 
 exit 0

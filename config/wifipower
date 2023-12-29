@@ -1,6 +1,0 @@
-#!/bin/bash
-. ./lib
-
-LOC="/etc/NetworkManager/conf.d/wifi-powersave.conf"
-printf "%s\n" "[connection]" "wifi.powersave = 2" | sudo tee $LOC
-sudo systemctl restart NetworkManager

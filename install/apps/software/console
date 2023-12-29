@@ -11,6 +11,7 @@ options+=(
   "fd" "" on
   "ripgrep" "" on
   "btop" "" on
+  "nvtop" "" on
   "bat" "" on
   "psutils" "" on
   "xsel" "" on

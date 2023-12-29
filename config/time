@@ -7,7 +7,4 @@ sudo timedatectl set-local-rtc 0
 printf "%s\n" "" "sudo timedatectl set-ntp true" ""
 sudo timedatectl set-ntp true
 # Keyboard layout
-if (confirm "sudo localectl set-x11-keymap tr pc105"); then
-  sudo localectl set-x11-keymap tr pc105
-  message "Keyboard layout is applied..."
-fi
+# sudo localectl set-x11-keymap tr pc105

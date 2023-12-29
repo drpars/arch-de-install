@@ -1,21 +1,39 @@
 #!/bin/bash
 . ./lib
 
-echo "Copying dotfiles..."
-if [ ! -d $cachedir/dotfiles ]; then
-  git clone https://github.com/drpars/dotfiles.git
+pictrs=$(xdg-user-dir PICTURES)
+if [ ! -d $cachedir/hypr-dot ]; then
+  git clone https://github.com/drpars/hypr-dot.git
 fi
-# hypr
-cp -r $cachedir/dotfiles/config/wayland/{hypr,mako,scripts,swaylock,waybar,wlogout,wofi} $DIRUSER/.config/
+echo "Copying dotfiles..."
+cp -rf $cachedir/hypr-dot/config/* $DIRUSER/.config/
 # user files
-cp $cachedir/dotfiles/.zshrc $DIRUSER/
-# ~/.config
-cp $cachedir/dotfiles/config/krusaderrc $DIRUSER/.config/
-cp -r $cachedir/dotfiles/config/{btop,imv,kitty,mc,Mousepad} $DIRUSER/.config/
-cp $cachedir/dotfiles/scripts/* $DIRUSER/.config/scripts/
+cp $cachedir/hypr-dot/.zshrc $DIRUSER/
 # make executable scripts files
 chmod +x $DIRUSER/.config/scripts/*
+chmod +x $DIRUSER/.config/hypr/*
 chmod +x $DIRUSER/.config/scripts/waybar/*
-chmod +x $DIRUSER/.config/hypr/xdg-portal-hyprland
 # wallpapers
-cp -r $cachedir/dotfiles/Wallpaper $DIRUSER/Resimler/
+cp -r $cachedir/hypr-dot/Wallpaper $pictrs
+# sddm
+if [ -f /usr/bin/sddm ]; then
+  sddm_conf_dir=/etc/sddm.conf.d
+  if [ ! -d "$sddm_conf_dir" ]; then
+    printf "$sddm_conf_dir not found, creating...\n"
+    sudo mkdir "$sddm_conf_dir"
+  fi
+  echo -e "[Theme]\nCurrent=sugar-candy" | sudo tee "$sddm_conf_dir/10-theme.conf"
+  sudo cp $cachedir/hypr-dot/sddm/sddm.conf "$sddm_conf_dir/"
+  sugar_candy_dir=/usr/share/sddm/themes/sugar-candy
+  if [ ! -d "$sugar_candy_dir" ]; then
+    printf "$sugar_candy_dir not found, creating...\n"
+    sudo tar -xzvf $cachedir/hypr-dot/sddm/sugar-candy/sugar-candy.tar.gz -C /usr/share/sddm/themes/
+    sudo cp $cachedir/hypr-dot/sddm/sugar-candy/theme.conf "$sugar_candy_dir/"
+    sudo cp $cachedir/hypr-dot/sddm/sugar-candy/background.jpg "$sugar_candy_dir/Backgrounds/"
+  fi
+else
+  message "Sddm not installed. \nFirst install sddm!"
+  if (confirm "Do you want to jump Display Manager installation ? \n "); then
+    menu install/displaymngr/menu
+  fi
+fi

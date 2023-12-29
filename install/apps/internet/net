@@ -5,6 +5,7 @@ options=()
 options+=(
 	"firefox" "" on
 	"thunderbird" "" on
+  "brave-bin" "AUR" off
 	"wget" "" off
 	"uget" "" off
 	"transmission-gtk" "" off
@@ -21,6 +22,7 @@ fi
 for itm in $sel; do
   case $itm in
 	"webapp-manager") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"brave-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
     *) pkg="$pkg $(echo $itm | sed 's/"//g')";;
   esac
 done

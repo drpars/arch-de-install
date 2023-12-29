@@ -13,6 +13,11 @@ cp $cachedir/hypr-dot/.zshrc $DIRUSER/
 chmod +x $DIRUSER/.config/scripts/*
 chmod +x $DIRUSER/.config/hypr/*
 chmod +x $DIRUSER/.config/scripts/waybar/*
+# themes
+if [ ! -d $DIRUSER/.themes ]; then
+  mkdir $DIRUSER/.themes
+fi
+tar -xzvf $cachedir/hypr-dot/themes/Tokyonight-Dark-BL-LB.tar.gz -C $DIRUSER/.themes/
 # wallpapers
 cp -r $cachedir/hypr-dot/Wallpaper $pictrs
 # sddm

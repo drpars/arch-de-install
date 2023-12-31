@@ -3,70 +3,105 @@
 
 options=()
 options+=(
-	"Aur helper" ""
+  "Install yay" ""
+  "Install paru" ""
   "" ""
-	"Upgrade" "pacman -Syu"
-	"Clean orphan" "pacman -Rns \$(pacman -Qqtd)"
-	"Clean cache" "pacman -Sc"
-	"" ""
-	"Edit pacman.conf" ""
-	"Edit mirrorlist" ""
-	"" ""
-	"Update keyring" "pacman -S archlinux-keyring"
-	"Refresh pacman keys" "pacman-key --refresh-keys"
-	"" ""
+  "Add Asus-G14 repo" ""
+  "" ""
+  "Upgrade" "pacman -Syu"
+  "Clean orphan" "pacman -Rns \$(pacman -Qqtd)"
+  "Clean cache" "pacman -Sc"
+  "" ""
+  "Edit pacman.conf" ""
+  "Edit mirrorlist" ""
+  "" ""
+  "Update keyring" "pacman -S archlinux-keyring"
+  "Refresh pacman keys" "pacman-key --refresh-keys"
+  "" ""
 )
 
 if [ -f /var/lib/pacman/db.lck ]; then
-	options+=(
-		"Remove db.lck" "rm /var/lib/pacman/db.lck"
-		"" ""
-	)
+  options+=(
+    "Remove db.lck" "rm /var/lib/pacman/db.lck"
+    "" ""
+  )
 fi
 
 sel=$(dialog --backtitle "$apptitle" --title "Updates Menu :" --cancel-button "Back" --menu "" 0 0 0 \
-	"${options[@]}" \
-	3>&1 1>&2 2>&3)
+  "${options[@]}" \
+  3>&1 1>&2 2>&3)
 if [ ! "$?" = "0" ]; then
-	exit 1
+  exit 1
 fi
 
 case $sel in
-"Aur helper") 
-  menu update/aur/menu 
+"Install yay")
+  if (confirm "Do you wanto install yay ?"); then
+    # Yay
+    clear
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+    cd ..
+    pressanykey
+  fi
+  ;;
+"Install paru")
+  if (confirm "Do you wanto install paru ?"); then
+    # Paru
+    clear
+    git clone https://aur.archlinux.org/paru.git
+    cd paru
+    makepkg -si --noconfirm
+    cd ..
+    pressanykey
+  fi
+  ;;
+"Add Asus-G14 repo")
+  sudo pacman-key --recv-keys 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+  sleep 3
+  sudo pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+  sleep 3
+  sudo pacman-key --lsign-key 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+  sleep 3
+  sudo pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+  sleep 3
+
+  sudo printf "%s\n" "[g14]" "Server = https://naru.jhyub.dev/\$repo" "#Server = https://arch.asus-linux.org" >>/etc/pacman.conf
+  sudo pacman -Sy
   ;;
 "Upgrade")
-	clear
-	sudo pacman -Syu
-	;;
+  clear
+  sudo pacman -Syu
+  ;;
 "Clean orphan")
   clear
-	sudo pacman -Rns $(pacman -Qqtd)
-	;;
+  sudo pacman -Rns $(pacman -Qqtd)
+  ;;
 "Clean cache")
   clear
-	sudo pacman -Sc
-	;;
+  sudo pacman -Sc
+  ;;
 "Edit pacman.conf")
   clear
-	sudo nvim /etc/pacman.conf
-	;;
+  sudo nvim /etc/pacman.conf
+  ;;
 "Edit mirrorlist")
   clear
   sudo nvim /etc/pacman.d/mirrorlist
   ;;
 "Update keyring")
   clear
-	sudo pacman -S archlinux-keyring
-	;;
+  sudo pacman -S archlinux-keyring
+  ;;
 "Refresh pacman keys")
   clear
-	sudo pacman-key --refresh-keys
-	;;
+  sudo pacman-key --refresh-keys
+  ;;
 "Remove db.lck")
   clear
-	sudo rm /var/lib/pacman/db.lck
-	;;
+  sudo rm /var/lib/pacman/db.lck
+  ;;
 esac
 
 exit 0

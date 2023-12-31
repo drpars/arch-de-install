@@ -3,6 +3,11 @@
 
 options=()
 options+=(
+  "zip" "" off
+  "unzip" "" off
+  "unrar" "" off
+  "p7zip" "" off
+  "lzop" "" off
   "cmatrix" "" off
   "neofetch" "" on
   "mpv" "" on
@@ -19,6 +24,7 @@ options+=(
   "wl-clipboard" "" on
   "zsh" "" on
   "zsh-completions" "" on
+  "lynx" "" off
   "jq" "" on
   "cava" "(AUR)" off
 )

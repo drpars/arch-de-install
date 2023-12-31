@@ -25,6 +25,11 @@ options+=(
   "piper" "" off
   "steam" "" on
   "heroic-games-launcher-bin" "(AUR)" on
+  "webapp-manager" "(AUR)" on
+	"gparted" "Partition manager" off
+	"bleachbit" "Profile cleaner" off
+	"stacer-bin" "(AUR)" off
+	"openrgb-bin" "(AUR)" off
   "isomaster" "(AUR)" off
   "startup-settings-git" "(AUR)" off
 )
@@ -37,6 +42,9 @@ fi
 
 for itm in $sel; do
   case $itm in
+	"webapp-manager") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"stacer-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+	"openrgb-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "isomaster") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "startup-settings-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "heroic-games-launcher-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;

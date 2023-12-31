@@ -3,13 +3,16 @@
 
 options=()
 options+=(
-	"gparted" "Partition manager" off
-	"bleachbit" "Profile cleaner" off
-	"stacer-bin" "(AUR)" off
-	"openrgb-bin" "(AUR)" off
-	"lm_sensors" "" on
-	"lib32-lm_sensors" "" on
-	"i2c-tools" "" on
+
+  "sshfs" "" off
+  "openssh" "" on
+  "samba" "" on
+  "man-db" "" on
+  "man-pages" "" on
+  "dialog" "" off
+	"lm_sensors" "" off
+	"lib32-lm_sensors" "" off
+	"i2c-tools" "" off
 )
 
 sel=$(dialog --backtitle "$apptitle" --title "System applications :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
@@ -21,8 +24,6 @@ fi
 
 for itm in $sel; do
 	case $itm in
-	"stacer-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-	"openrgb-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
 	esac
 done

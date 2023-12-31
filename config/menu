@@ -3,14 +3,15 @@
 
 options=()
 options+=(
-  "Time & keymap settings" ""
   "Samba settings" ""
   "Disk settings" ""
   "NVIDIA settings" ""
   "Hibernation settings" ""
+  "Pacman settings" ""
+  "SSH settings" ""
+  "Hyprland-Dotfiles" ""
   "Neovim configs" ""
   "Remove neovim configs" ""
-  "Hyprland-Dotfiles" ""
 )
 sel=$(dialog --backtitle "$apptitle" --title "Settings :" --cancel-button "Back" --menu "" 0 0 0 \
   "${options[@]}" \
@@ -65,6 +66,35 @@ case $sel in
     pressanykey
   fi
   ;;
+"Pacman settings")
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/pcmn
+  if (confirm "Do you want to apply pacman script ?"); then
+    clear
+    sscript config/pcmn
+    pressanykey
+  fi
+  ;;
+"SSH settings")
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/ssh
+  if (confirm "Do you want to apply ssh script ?"); then
+    clear
+    sscript config/ssh
+    pressanykey
+  fi
+  ;;
+"Hyprland-Dotfiles")
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/hypr-dot
+  if (confirm "Do you want to copy all dotfiles ? \n "); then
+    clear
+    script config/hypr-dot
+    pressanykey
+  else
+    message "Nothing copied \n "
+  fi
+  ;;
 "Neovim configs")
   if (confirm "Do you want to copy nvim config ? \n "); then
     clear
@@ -80,17 +110,6 @@ case $sel in
     rm -rf ~/.local/share/nvim
     rm -rf ~/.cache/nvim
     message "Neovim removed. \n "
-  fi
-  ;;
-"Hyprland-Dotfiles")
-  message "Script will open neovim editor. \nTo quit press ":q""
-  nvim config/hypr-dot
-  if (confirm "Do you want to copy all dotfiles ? \n "); then
-    clear
-    script config/hypr-dot
-    pressanykey
-  else
-    message "Nothing copied \n "
   fi
   ;;
 esac

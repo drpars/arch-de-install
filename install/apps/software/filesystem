@@ -3,6 +3,7 @@
 
 options=()
 options+=(
+  "dosfstools" "" on
   "gvfs" "" on
   "gvfs-mtp" "" on
   "gvfs-smb" "" on

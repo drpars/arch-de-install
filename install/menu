@@ -3,13 +3,13 @@
 
 options=()
 options+=(
-	"Apps" ""
+	"Drivers" ""
+	"Asus Rog Strix" ""
+	"Applications" ""
 	"Fonts" ""
 	"Themes" ""
-	"Drivers" ""
 	"Desktop Environment" ""
 	"Display Manager" ""
-	"Asus Rog Strix" ""
 )
 
 defaultitem=""
@@ -22,13 +22,13 @@ fi
 sed i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
 
 case $sel in
-"Apps") menu install/apps/menu ;;
+"Drivers") menu install/drivers/menu ;;
+"Asus Rog Strix") menu install/asus/menu ;;
+"Applications") menu install/apps/menu ;;
 "Fonts") script install/fonts/fonts ;;
 "Themes") script install/themes/themes ;;
-"Drivers") menu install/drivers/menu ;;
 "Desktop Environment") menu install/de/menu ;;
 "Display Manager") menu install/displaymngr/menu ;;
-"Asus Rog Strix") menu install/asus/menu ;;
 esac
 
 exit 0

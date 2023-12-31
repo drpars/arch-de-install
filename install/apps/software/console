@@ -25,7 +25,6 @@ options+=(
   "zsh" "" on
   "zsh-completions" "" on
   "lynx" "" off
-  "jq" "" on
   "cava" "(AUR)" off
 )
 sel=$(dialog --backtitle "$apptitle" --title "Console Applications :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \

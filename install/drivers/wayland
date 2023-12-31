@@ -3,13 +3,15 @@
 
 options=()
 options+=(
-	"libva" "" on
+	"nvidia" "" off
+	"nvidia-dkms" "" off
 	"nvidia-open-dkms" "" on
 	"nvidia-utils" "" on
 	"lib32-nvidia-utils" "" on
 	"opencl-nvidia" "" on
 	"lib32-opencl-nvidia" "" on
 	"nvidia-settings" "" on
+	"libva" "" on
 	"libva-nvidia-driver-git" "(AUR)" off
 )
 sel=$(dialog --backtitle "$apptitle" --title "Nvidia for wayland :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \

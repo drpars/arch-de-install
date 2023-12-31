@@ -3,6 +3,7 @@
 
 options=()
 options+=(
+  "Create swap file" ""
   "Samba settings" ""
   "Disk settings" ""
   "NVIDIA settings" ""
@@ -21,12 +22,12 @@ if [ ! "$?" = "0" ]; then
 fi
 
 case $sel in
-"Time & keymap settings")
+"Create swap file")
   message "Script will open neovim editor. \nTo quit press ":q""
-  nvim config/time
-  if (confirm "Do you want to apply time script ?"); then
+  nvim config/swap
+  if (confirm "Do you want to apply swap script ?"); then
     clear
-    script config/time
+    sscript config/swap
     pressanykey
   fi
   ;;

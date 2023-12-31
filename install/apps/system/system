@@ -30,8 +30,4 @@ done
 
 instpkg "$pkg" "$aurpkg"
 
-if [ -f /usr/bin/sensors-detect ]; then
-	sudo sensors-detect --auto
-fi
-
 exit 0

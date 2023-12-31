@@ -8,6 +8,8 @@ options+=(
   "" ""
   "Add Asus-G14 repo" ""
   "" ""
+  "Update systemd bootloader" ""
+  "" ""
   "Upgrade" "pacman -Syu"
   "Clean orphan" "pacman -Rns \$(pacman -Qqtd)"
   "Clean cache" "pacman -Sc"
@@ -67,8 +69,17 @@ case $sel in
   sudo pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
   sleep 3
 
-  sudo printf "%s\n" "[g14]" "Server = https://naru.jhyub.dev/\$repo" "#Server = https://arch.asus-linux.org" >>/etc/pacman.conf
+  printf "%s\n" "" "[g14]" "Server = https://naru.jhyub.dev/\$repo" "#Server = https://arch.asus-linux.org" | sudo tee -a /etc/pacman.conf
   sudo pacman -Sy
+  ;;
+"Update systemd bootloader")
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim update/bootloader
+  if (confirm "Do you want to apply systemd-bootloader update script ?"); then
+    clear
+    script update/bootloader
+    pressanykey
+  fi
   ;;
 "Upgrade")
   clear

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Shell
+sudo pacman -S --needed edk2-shell
+sudo cp /usr/share/edk2-shell/x64/Shell.efi /efi/shellx64.efi
+# Systemd boot install
+sudo bootctl --efi-boot-option-description="Arch Linux" update
+# Loader config
+printf "%s\n" "timeout  menu-force" "console-mode  max" | sudo tee /boot/loader/loader.conf

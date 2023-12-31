@@ -4,9 +4,10 @@ part1=$(lsblk -dno PARTUUID /dev/nvme0n1p3)
 part2=$(findmnt -no UUID -T /swapfile)
 part3=$(filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}')
 part4=$(cat /etc/kernel/cmdline)
-hbrnation="$part4 resume=UUID=$part2 resume_offset=$part3"
+hbrnation="$part4 systemd.unit=graphical.target nvidia-drm.modeset=1 resume=UUID=$part2 resume_offset=$part3"
 printf "%s" "$hbrnation" | sudo tee /etc/kernel/cmdline
 
-sudo sed -Ei 's/^(HOOKS=\([^\)]*)\)/\1 resume)/' ~/Belgeler/mkinitcpio.conf
+sed -i -e 's/fsck/resume fsck/g' /etc/mkinitcpio.conf
+# sudo sed -Ei 's/^(HOOKS=\([^\)]*)\)/\1 resume)/' /etc/mkinitcpio.conf
 
 mkinitcpio -P

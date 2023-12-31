@@ -3,6 +3,7 @@
 
 options=()
 options+=(
+"Patch vconsole" ""
   "Create swap file" ""
   "Samba settings" ""
   "Disk settings" ""
@@ -22,6 +23,15 @@ if [ ! "$?" = "0" ]; then
 fi
 
 case $sel in
+  "Patch vconsole")
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/patchvc
+  if (confirm "Do you want to apply vconsole patch script ?"); then
+    clear
+    script config/patchvc
+    pressanykey
+  fi
+    ;;
 "Create swap file")
   message "Script will open neovim editor. \nTo quit press ":q""
   nvim config/swap

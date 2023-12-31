@@ -1,0 +1,7 @@
+#!/bin/bash
+
+yay -S kmscon-patched-git
+
+sudo mkdir /etc/kmscon 
+printf "%s\n" "" "font-name=UbuntuMono Nerd Font" "font-size=14" | sudo tee /etc/kmscon/kmscon.conf
+sudo systemctl enable kmsconvt@tty5.service

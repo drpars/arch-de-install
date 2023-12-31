@@ -5,3 +5,5 @@ dd if=/dev/zero of=/swapfile bs=1M count=8192 status=progress
 chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
+
+printf "%s\n" "" "/swapfile none swap defaults 0 0" | sudo tee -a /etc/fstab 

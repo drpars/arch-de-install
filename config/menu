@@ -3,7 +3,7 @@
 
 options=()
 options+=(
-"Patch vconsole" ""
+  "Patch vconsole" ""
   "Create swap file" ""
   "Samba settings" ""
   "Disk settings" ""
@@ -23,7 +23,7 @@ if [ ! "$?" = "0" ]; then
 fi
 
 case $sel in
-  "Patch vconsole")
+"Patch vconsole")
   message "Script will open neovim editor. \nTo quit press ":q""
   nvim config/patchvc
   if (confirm "Do you want to apply vconsole patch script ?"); then
@@ -31,7 +31,7 @@ case $sel in
     script config/patchvc
     pressanykey
   fi
-    ;;
+  ;;
 "Create swap file")
   message "Script will open neovim editor. \nTo quit press ":q""
   nvim config/swap
@@ -53,7 +53,7 @@ case $sel in
 "Disk settings")
   message "Script will open neovim editor. \nTo quit press ":q""
   nvim config/disks
-  if (confirm "Do you want to apply disks script ?"); then
+  if (confirm "Do you want to apply disks settings script ?"); then
     clear
     script config/disks
     pressanykey
@@ -120,7 +120,7 @@ case $sel in
     rm -rf ~/.config/nvim
     rm -rf ~/.local/share/nvim
     rm -rf ~/.cache/nvim
-    message "Neovim removed. \n "
+    message "Neovim configs are completely removed. \n "
   fi
   ;;
 esac

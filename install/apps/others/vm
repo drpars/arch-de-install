@@ -20,6 +20,6 @@ else
   printf "%s\n" "" "# User Settings" "user = \"$USER\"" "group = \"$USER\"" | sudo tee -a /etc/libvirt/qemu.conf
 fi
 
-sudo systemctl enable libvirtd.service
+ sudo systemctl enable libvirtd.service
 
 pressanykey

@@ -7,4 +7,6 @@ part4=$(cat /etc/kernel/cmdline)
 hbrnation="$part4 resume=UUID=$part2 resume_offset=$part3"
 printf "%s" "$hbrnation" | sudo tee /etc/kernel/cmdline
 
+sudo sed -Ei 's/^(HOOKS=\([^\)]*)\)/\1 resume)/' ~/Belgeler/mkinitcpio.conf
+
 mkinitcpio -P

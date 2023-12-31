@@ -1,7 +1,25 @@
 #!/bin/bash
 
-yay -S kmscon-patched-git
+# only tty5 will patch
+#
+yay -S --needed kmscon-patched-git
 
-sudo mkdir /etc/kmscon 
+# checking fonts
+touch fnts
+fnt=$(ls /usr/share/fonts/TTF <fnts)
+
+if grep UbuntuMonoNerd fnts; then
+  sudo pacman -S ttf-ubuntu-mono-nerd
+else
+  echo "UbuntuMonoNerd Font is already installed"
+fi
+
+rm fnts
+
+if [ ! -d /etc/kmscon ]; then
+  sudo mkdir /etc/kmscon
+fi
+# kmscon settings
 printf "%s\n" "" "font-name=UbuntuMono Nerd Font" "font-size=14" | sudo tee /etc/kmscon/kmscon.conf
+# enable patch fot tty5
 sudo systemctl enable kmsconvt@tty5.service

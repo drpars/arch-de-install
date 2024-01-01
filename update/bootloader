@@ -30,7 +30,7 @@ for sel in $lnx; do
 done
 for sel in $lnx; do
   if [ -f /boot/EFI/Linux/arch-$sel-fallback.efi ]; then
-    sudo bootctl unlink arch-linux-fallback
+    sudo bootctl unlink arch-$sel-fallback
   fi
 done
 # Loader config
@@ -53,8 +53,8 @@ fi
 
 if [ ! -f /etc/initcpio/post/uki-sbctl ]; then
   # To sign automatically after Generating UKI
-  printf "%s\n" "#!/usr/bin/env bash" "sbctl sign-all" | tee /etc/initcpio/post/uki-sbctl
-  chmod +x /etc/initcpio/post/uki-sbctl
+  printf "%s\n" "#!/usr/bin/env bash" "sbctl sign-all" | sudo tee /etc/initcpio/post/uki-sbctl
+  sudo chmod +x /etc/initcpio/post/uki-sbctl
 fi
 
-bootctl update
+sudo bootctl update

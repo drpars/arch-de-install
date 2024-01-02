@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# only linux kernel supported
 # Shell
 sudo pacman -S --needed edk2-shell
 sudo cp /usr/share/edk2-shell/x64/Shell.efi /boot/shellx64.efi
@@ -30,7 +29,7 @@ for sel in $lnx; do
 done
 for sel in $lnx; do
   if [ -f /boot/EFI/Linux/arch-$sel-fallback.efi ]; then
-    sudo bootctl unlink arch-$sel-fallback
+    sudo bootctl unlink arch-$sel-fallback.efi
   fi
 done
 # Loader config
@@ -57,4 +56,8 @@ if [ ! -f /etc/initcpio/post/uki-sbctl ]; then
   sudo chmod +x /etc/initcpio/post/uki-sbctl
 fi
 
-sudo bootctl update
+sudo mkinitcpio -P
+
+if [ -f /usr/bin/bootctl ]; then
+  sudo bootctl update
+fi

@@ -9,6 +9,8 @@ echo "Copying dotfiles..."
 cp -rf $cachedir/hypr-dot/config/* $DIRUSER/.config/
 # user files
 cp $cachedir/hypr-dot/.zshrc $DIRUSER/
+cp $cachedir/hypr-dot/.gitconfig $DIRUSER/
+cp $cachedir/hypr-dot/.gtkrc-2.0 $DIRUSER/
 # make executable scripts files
 chmod +x $DIRUSER/.config/scripts/*
 chmod +x $DIRUSER/.config/hypr/*

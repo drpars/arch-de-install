@@ -3,8 +3,8 @@
 
 options=()
 options+=(
-  "hyprland" "" off
-  "hyprland-git" "(AUR)" on
+  "hyprland" "" on
+  "hyprland-git" "(AUR)" off
   "qt5ct" "" off
   "qt5ct-kde" "(AUR)" on
   "qt5-wayland" "" on
@@ -20,8 +20,8 @@ options+=(
 	"lightly-boehs-git" "(AUR)" off
 	"lightly-git" "(AUR)" on
   "kitty" "" on
-  "wofi" "" on
-  "rofi" "" off
+  "wofi" "" off
+  "rofi" "" on
   "mako" "" on
   "swappy" "" on
   "grim" "" on
@@ -40,7 +40,7 @@ options+=(
   "blueman" "" on
   "iwgtk" "(AUR)" on
   "xdg-desktop-portal-hyprland" "" on
-  "xdg-desktop-portal-gtk" "" off
+  "xdg-desktop-portal-gtk" "" on
 )
 
 sel=$(dialog --backtitle "$apptitle" --title "Hyprland :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \

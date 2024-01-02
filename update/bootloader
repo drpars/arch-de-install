@@ -11,8 +11,6 @@ linux
 linux-lts
 linux-zen
 linux-hardened
-linux-rt
-linux-rt-lts
 linux-g14
 "
 
@@ -37,7 +35,7 @@ printf "%s\n" "timeout  menu-force" "console-mode  max" | sudo tee /boot/loader/
 # Secure Boot with sbctl
 if [[ "$(efivar -d --name 8be4df61-93ca-11d2-aa0d-00e098032b8c-SetupMode)" -eq 1 ]]; then
   echo "Setting up Secure Boot..."
-  sud sbctl create-keys
+  sudo sbctl create-keys
   sudo sbctl enroll-keys -m
   sudo sbctl sign -s -o /usr/lib/systemd/boot/efi/systemd-bootx64.efi.signed /usr/lib/systemd/boot/efi/systemd-bootx64.efi
   for sel in $lnx; do
@@ -59,5 +57,5 @@ fi
 sudo mkinitcpio -P
 
 if [ -f /usr/bin/bootctl ]; then
-  sudo bootctl update
+  sudo bootctl install
 fi

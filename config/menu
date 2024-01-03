@@ -3,14 +3,14 @@
 
 options=()
 options+=(
-  "Patch vconsole" ""
+  "Modify pacman.conf" ""
   "Create swap file" ""
+  "Hibernation settings" ""
+  "GPU settings" ""
+  "Patch vconsole" ""
+  "SSH settings" ""
   "Samba settings" ""
   "Disk settings" ""
-  "NVIDIA settings" ""
-  "Hibernation settings" ""
-  "Pacman settings" ""
-  "SSH settings" ""
   "Hyprland-Dotfiles" ""
   "Neovim configs" ""
   "Remove neovim configs" ""
@@ -23,12 +23,12 @@ if [ ! "$?" = "0" ]; then
 fi
 
 case $sel in
-"Patch vconsole")
+"Modify pacman.conf")
   message "Script will open neovim editor. \nTo quit press ":q""
-  nvim config/patchvc
-  if (confirm "Do you want to apply vconsole patch script ?"); then
+  nvim config/pcmn
+  if (confirm "Do you want to apply pacman script ?"); then
     clear
-    script config/patchvc
+    sscript config/pcmn
     pressanykey
   fi
   ;;
@@ -38,6 +38,42 @@ case $sel in
   if (confirm "Do you want to apply swap script ?"); then
     clear
     sscript config/swap
+    pressanykey
+  fi
+  ;;
+"Hibernation settings")
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/hibernation
+  if (confirm "Do you want to apply hibernation script ?"); then
+    clear
+    sscript config/hibernation
+    pressanykey
+  fi
+  ;;
+"GPU settings")
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/gpu
+  if (confirm "Do you wanto apply gpu script ?"); then
+    clear
+    script config/gpu
+    pressanykey
+  fi
+  ;;
+"Patch vconsole")
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/patchvc
+  if (confirm "Do you want to apply vconsole patch script ?"); then
+    clear
+    script config/patchvc
+    pressanykey
+  fi
+  ;;
+"SSH settings")
+  message "Script will open neovim editor. \nTo quit press ":q""
+  nvim config/ssh
+  if (confirm "Do you want to apply ssh script ?"); then
+    clear
+    sscript config/ssh
     pressanykey
   fi
   ;;
@@ -56,42 +92,6 @@ case $sel in
   if (confirm "Do you want to apply disks settings script ?"); then
     clear
     script config/disks
-    pressanykey
-  fi
-  ;;
-"NVIDIA settings")
-  message "Script will open neovim editor. \nTo quit press ":q""
-  nvim config/nvidia
-  if (confirm "Do you wanto apply nvidia script ?"); then
-    clear
-    script config/nvidia
-    pressanykey
-  fi
-  ;;
-"Hibernation settings")
-  message "Script will open neovim editor. \nTo quit press ":q""
-  nvim config/hibernation
-  if (confirm "Do you want to apply hibernation script ?"); then
-    clear
-    sscript config/hibernation
-    pressanykey
-  fi
-  ;;
-"Pacman settings")
-  message "Script will open neovim editor. \nTo quit press ":q""
-  nvim config/pcmn
-  if (confirm "Do you want to apply pacman script ?"); then
-    clear
-    sscript config/pcmn
-    pressanykey
-  fi
-  ;;
-"SSH settings")
-  message "Script will open neovim editor. \nTo quit press ":q""
-  nvim config/ssh
-  if (confirm "Do you want to apply ssh script ?"); then
-    clear
-    sscript config/ssh
     pressanykey
   fi
   ;;

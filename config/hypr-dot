@@ -6,24 +6,30 @@ clonedir=$DIRUSER/.dotfiles/hypr-dot
 configfiles="$(ls $clonedir/config)"
 pictrs=$(xdg-user-dir PICTURES)
 
-mkdir -p $backupdir
-mkdir -p $clonedir
+read -rep "Do do you want to start copy dotfiles ? (y,n)" copydot
+if [[ $copydot =~ ^[yY]$ ]]; then
+  mkdir -p $backupdir
+  mkdir -p $clonedir
 
-if [ -d $clonedir ]; then
-  rm -rf $clonedir
-  git clone https://github.com/drpars/hypr-dot.git $clonedir
-fi
-
-for sel in $configfiles; do
-  if [ -d $DIRUSER/.config/$sel ]; then
-    mv $DIRUSER/.config/$sel $backupdir
-  elif [ -L $DIRUSER/.config/$sel ]; then
-    rm $DIRUSER/.config/$sel
+  if [ -d $clonedir ]; then
+    rm -rf $clonedir
+    git clone https://github.com/drpars/hypr-dot.git $clonedir
   fi
-done
-# dotfiles
-ln -sr $clonedir/config/* $DIRUSER/.config
-printf "%s\n" "" "Config files are created."
+
+  for sel in $configfiles; do
+    if [ -d $DIRUSER/.config/$sel ]; then
+      mv $DIRUSER/.config/$sel $backupdir
+    elif [ -L $DIRUSER/.config/$sel ]; then
+      rm $DIRUSER/.config/$sel
+    fi
+  done
+  # dotfiles
+  ln -sr $clonedir/config/* $DIRUSER/.config
+  ln -sr $clonedir/.gitconfig $DIRUSER
+  ln -sr $clonedir/.gtkrc-2.0 $DIRUSER
+  ln -sr $clonedir/.zshrc $DIRUSER
+  printf "%s\n" "" "Config files are created."
+fi
 
 read -rep "Do you want to authorize $clonedir (hypr-dot repo) with github token key ? (y,n) : " auth
 if [[ $auth =~ ^[yY]$ ]]; then

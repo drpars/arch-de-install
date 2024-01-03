@@ -3,10 +3,11 @@
 
 options=()
 options+=(
-  "Nvidia driver" ""
   "Amd GPU" ""
+  "Nvidia driver" ""
+	"Asus Rog Strix" ""
   "Sound" ""
-  "Mkinitcpio firmware" ""
+  "Mkinitcpio firmware" "(AUR)"
 )
 
 defaultitem=""
@@ -19,10 +20,11 @@ fi
 sed i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
 
 case $sel in
+"Amd GPU") script install/drivers/amdgpu ;;
 "Nvidia driver")
   menu install/drivers/nvidia
   ;;
-"Amd GPU") script install/drivers/amdgpu ;;
+"Asus Rog Strix") menu install/drivers/asus/menu ;;
 "Sound") script install/drivers/sound ;;
 "Mkinitcpio firmware")
   if (confirm "Do you want to install firmware ? \n "); then

@@ -37,7 +37,7 @@ case $sel in
   nvim config/swap
   if (confirm "Do you want to apply swap script ?"); then
     clear
-    sscript config/swap
+    script config/swap
     pressanykey
   fi
   ;;

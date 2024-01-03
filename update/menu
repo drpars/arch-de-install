@@ -60,17 +60,20 @@ case $sel in
   fi
   ;;
 "Add Asus-G14 repo")
-  sudo pacman-key --recv-keys 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
-  sleep 3
-  sudo pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
-  sleep 3
-  sudo pacman-key --lsign-key 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
-  sleep 3
-  sudo pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
-  sleep 3
-
-  printf "%s\n" "" "[g14]" "Server = https://naru.jhyub.dev/\$repo" "#Server = https://arch.asus-linux.org" | sudo tee -a /etc/pacman.conf
-  sudo pacman -Sy
+  if (confirm "Do you wanto install add asus-g14 repo ?"); then
+    clear
+    sudo pacman-key --recv-keys 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+    sleep 3
+    sudo pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+    sleep 3
+    sudo pacman-key --lsign-key 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+    sleep 3
+    sudo pacman-key --finger 8F654886F17D497FEFE3DB448B15A6B0E9A3FA35
+    sleep 3
+    printf "%s\n" "" "[g14]" "Server = https://naru.jhyub.dev/\$repo" "#Server = https://arch.asus-linux.org" | sudo tee -a /etc/pacman.conf
+    sudo pacman -Sy
+    pressanykey
+  fi
   ;;
 "Update systemd bootloader")
   message "Script will open neovim editor. \nTo quit press ":q""

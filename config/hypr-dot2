@@ -1,0 +1,23 @@
+#!/bin/bash
+
+backupdir=$HOME/.hyprdot/backup
+clonedir=$HOME/.hyprdot/hypr-dot
+configfiles="$(ls $clonedir/config)"
+
+mkdir -p $backupdir
+mkdir -p $clonedir
+
+if [ -d $clonedir ]; then
+  rm -rf $clonedir
+  git clone https://github.com/drpars/hypr-dot.git $clonedir
+fi
+
+for sel in $configfiles; do
+  if [ -d ~/.config/$sel ]; then
+    mv ~/.config/$sel $backupdir
+  elif [ -L ~/.config/$sel ]; then
+    rm ~/.config/$sel
+  fi
+done
+ln -sr $clonedir/config/* ~/.config
+printf "%s\n" "" "Config files are created."

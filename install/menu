@@ -4,7 +4,6 @@
 options=()
 options+=(
 	"Drivers" ""
-	"Asus Rog Strix" ""
 	"Applications" ""
 	"Fonts" ""
 	"Themes" ""
@@ -23,7 +22,6 @@ sed i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
 
 case $sel in
 "Drivers") menu install/drivers/menu ;;
-"Asus Rog Strix") menu install/asus/menu ;;
 "Applications") menu install/apps/menu ;;
 "Fonts") script install/fonts/fonts ;;
 "Themes") script install/themes/themes ;;

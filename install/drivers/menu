@@ -24,7 +24,7 @@ case $sel in
 "Nvidia driver")
   menu install/drivers/nvidia
   ;;
-"Asus Rog Strix") menu install/drivers/asus/menu ;;
+"Asus Rog Strix") menu install/drivers/asus ;;
 "Sound") script install/drivers/sound ;;
 "Mkinitcpio firmware")
   if (confirm "Do you want to install firmware ? \n "); then

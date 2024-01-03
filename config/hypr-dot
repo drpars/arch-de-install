@@ -1,46 +1,73 @@
 #!/bin/bash
 . ./lib
 
+backupdir=$DIRUSER/.dotfiles/backup
+clonedir=$DIRUSER/.dotfiles/hypr-dot
+configfiles="$(ls $clonedir/config)"
 pictrs=$(xdg-user-dir PICTURES)
-if [ ! -d $cachedir/hypr-dot ]; then
-  git clone https://github.com/drpars/hypr-dot.git
+
+mkdir -p $backupdir
+mkdir -p $clonedir
+
+if [ -d $clonedir ]; then
+  rm -rf $clonedir
+  git clone https://github.com/drpars/hypr-dot.git $clonedir
 fi
-echo "Copying dotfiles..."
-cp -rf $cachedir/hypr-dot/config/* $DIRUSER/.config/
-# user files
-cp $cachedir/hypr-dot/.zshrc $DIRUSER/
-cp $cachedir/hypr-dot/.gitconfig $DIRUSER/
-cp $cachedir/hypr-dot/.gtkrc-2.0 $DIRUSER/
-# make executable scripts files
-chmod +x $DIRUSER/.config/scripts/*
-chmod +x $DIRUSER/.config/hypr/*
-chmod +x $DIRUSER/.config/scripts/waybar/*
-# themes
-if [ ! -d $DIRUSER/.themes ]; then
-  mkdir $DIRUSER/.themes
+
+for sel in $configfiles; do
+  if [ -d $DIRUSER/.config/$sel ]; then
+    mv $DIRUSER/.config/$sel $backupdir
+  elif [ -L $DIRUSER/.config/$sel ]; then
+    rm $DIRUSER/.config/$sel
+  fi
+done
+# dotfiles
+ln -sr $clonedir/config/* $DIRUSER/.config
+printf "%s\n" "" "Config files are created."
+
+read -rep "Do you want to authorize $clonedir (hypr-dot repo) with github token key ? (y,n) : " auth
+if [[ $auth =~ ^[yY]$ ]]; then
+  read -rep "Enter your github user name : " username
+  read -rep "Enter token key : " token
+  cd $clonedir
+  git remote set-url origin https://$username:$token@github.com/$username/hypr-dot.git
+  cd ..
 fi
-tar -xzvf $cachedir/hypr-dot/themes/Tokyonight-Dark-BL-LB.tar.gz -C $DIRUSER/.themes/
-# wallpapers
-cp -r $cachedir/hypr-dot/Wallpaper $pictrs
-# sddm
-if [ -f /usr/bin/sddm ]; then
-  sddm_conf_dir=/etc/sddm.conf.d
-  if [ ! -d "$sddm_conf_dir" ]; then
-    printf "$sddm_conf_dir not found, creating...\n"
-    sudo mkdir "$sddm_conf_dir"
+# other dotfles for hyprland
+read -rep "Do you want to copy user themes ? (y,n) " theme
+if [[ $theme =~ ^[yY]$ ]]; then
+  if [ ! -d $DIRUSER/.themes ]; then
+    mkdir $DIRUSER/.themes
   fi
-  echo -e "[Theme]\nCurrent=sugar-candy" | sudo tee "$sddm_conf_dir/10-theme.conf"
-  sudo cp $cachedir/hypr-dot/sddm/sddm.conf "$sddm_conf_dir/"
-  sugar_candy_dir=/usr/share/sddm/themes/sugar-candy
-  if [ ! -d "$sugar_candy_dir" ]; then
-    printf "$sugar_candy_dir not found, creating...\n"
-    sudo tar -xzvf $cachedir/hypr-dot/sddm/sugar-candy/sugar-candy.tar.gz -C /usr/share/sddm/themes/
-    sudo cp $cachedir/hypr-dot/sddm/sugar-candy/theme.conf "$sugar_candy_dir/"
-    sudo cp $cachedir/hypr-dot/sddm/sugar-candy/background.jpg "$sugar_candy_dir/Backgrounds/"
-  fi
-else
-  message "Sddm not installed. \nFirst install sddm!"
-  if (confirm "Do you want to jump Display Manager installation ? \n "); then
-    menu install/displaymngr/menu
+  tar -xzvf $clonedir/themes/Tokyonight-Dark-BL-LB.tar.gz -C $DIRUSER/.themes/
+fi
+
+read -rep "Do you want to copy wallpapers ? (y,n) " wallpaper
+if [[ $wallpaper =~ ^[yY]$ ]]; then
+  cp -r $clonedir/Wallpaper $pictrs
+fi
+
+read -rep "Do you want to set sddm settings & theme ? (y,n) " sdm
+if [[ $sdm =~ ^[yY]$ ]]; then
+  if [ -f /usr/bin/sddm ]; then
+    sddm_conf_dir=/etc/sddm.conf.d
+    if [ ! -d "$sddm_conf_dir" ]; then
+      printf "$sddm_conf_dir not found, creating...\n"
+      sudo mkdir "$sddm_conf_dir"
+    fi
+    echo -e "[Theme]\nCurrent=sugar-candy" | sudo tee "$sddm_conf_dir/10-theme.conf"
+    sudo cp $clonedir/sddm/sddm.conf "$sddm_conf_dir/"
+    sugar_candy_dir=/usr/share/sddm/themes/sugar-candy
+    if [ ! -d "$sugar_candy_dir" ]; then
+      printf "$sugar_candy_dir not found, creating...\n"
+      sudo tar -xzvf $clonedir/sddm/sugar-candy/sugar-candy.tar.gz -C /usr/share/sddm/themes/
+      sudo cp $clonedir/sddm/sugar-candy/theme.conf "$sugar_candy_dir/"
+      sudo cp $clonedir/sddm/sugar-candy/background.jpg "$sugar_candy_dir/Backgrounds/"
+    fi
+  else
+    message "Sddm not installed. \nFirstly install sddm!"
+    if (confirm "Do you want to jump Display Manager installation ? \n "); then
+      menu install/displaymngr/menu
+    fi
   fi
 fi

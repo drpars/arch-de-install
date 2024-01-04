@@ -5,6 +5,9 @@ options=()
 options+=(
   "hyprland" "" on
   "hyprland-git" "(AUR)" off
+  "xdg-desktop-portal-hyprland" "" on
+  "xdg-desktop-portal-gtk" "" on
+  "hyprpicker" "(AUR)" on
   "qt5ct" "" off
   "qt5ct-kde" "(AUR)" on
   "qt5-wayland" "" on
@@ -17,10 +20,10 @@ options+=(
   "wttrbar" "(AUR)" off
   "nwg-look-bin" "(AUR)" off
   "lxappearance" "" off
-	"lightly-boehs-git" "(AUR)" off
 	"lightly-git" "(AUR)" on
+	"lightly-boehs-git" "(AUR)" off
   "kitty" "" on
-  "wofi" "" off
+  "wofi" "" on
   "rofi" "" on
   "mako" "" on
   "swappy" "" on
@@ -39,8 +42,6 @@ options+=(
   "pavucontrol" "" on
   "blueman" "" on
   "iwgtk" "(AUR)" on
-  "xdg-desktop-portal-hyprland" "" on
-  "xdg-desktop-portal-gtk" "" on
 )
 
 sel=$(dialog --backtitle "$apptitle" --title "Hyprland :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
@@ -54,6 +55,7 @@ for itm in $sel; do
   case $itm in
   # "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "hyprland-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  "hyprpicker") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "qt5ct-kde") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "waybar-updates") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "wttrbar") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;

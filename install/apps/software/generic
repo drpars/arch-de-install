@@ -5,29 +5,15 @@ options=()
 options+=(
   "libreoffice-fresh" "" off
   "libreoffice-still" "" off
-  "thunar" "" on
-  "thunar-volman" "" on
-  "thunar-archive-plugin" "" on
-  "file-roller" "" on
-  "xfce4-settings" "" off
-  "tumbler" "" on
-  "dolphin" "" off
-  "dolphin-plugins" "" off
-  "kdenetwork-filesharing" "" off
-  "krusader" "" on
-  "krename" "" on
-  "kdiff3" "" on
-  "ffmpegthumbs" "" off
   "smplayer" "" off
   "smplayer-skins" "" off
   "smplayer-themes" "" off
   "mousepad" "" on
   "piper" "" off
   "steam" "" on
+	"bleachbit" "Profile cleaner" off
   "heroic-games-launcher-bin" "(AUR)" on
   "webapp-manager" "(AUR)" on
-	"gparted" "Partition manager" off
-	"bleachbit" "Profile cleaner" off
 	"stacer-bin" "(AUR)" off
 	"openrgb-bin" "(AUR)" off
   "isomaster" "(AUR)" off

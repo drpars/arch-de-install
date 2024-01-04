@@ -46,6 +46,7 @@ if [[ $theme =~ ^[yY]$ ]]; then
     mkdir $DIRUSER/.themes
   fi
   tar -xzvf $clonedir/themes/Tokyonight-Dark-BL-LB.tar.gz -C $DIRUSER/.themes/
+  tar -xzvf $clonedir/themes/HeroicTheme.tar.gz -C $DIRUSER/.themes/
 fi
 
 read -rep "Do you want to copy wallpapers ? (y,n) " wallpaper

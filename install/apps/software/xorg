@@ -7,6 +7,7 @@ options+=(
 	"xorg-server-common" "" off
   "xorg-xinit" "" off
   "xorg-xwayland" "" off
+  "xorg-xhost" "" off
   "xorg-xcursorgen" "" off
 )
 sel=$(dialog --backtitle "$apptitle" --title "Multimedia :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \

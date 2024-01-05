@@ -20,6 +20,8 @@ if [ ! -d /etc/kmscon ]; then
   sudo mkdir /etc/kmscon
 fi
 # kmscon settings
-printf "%s\n" "" "font-name=UbuntuMono Nerd Font" "font-size=14" | sudo tee /etc/kmscon/kmscon.conf
+printf "%s\n" "" "font-name=Jet Brains Mono Nerd Font" "font-size=10" "font-dpi=128" | sudo tee /etc/kmscon/kmscon.conf
+# disable default tty5
+sudo systemctl disable getty@tty5.service
 # enable patch fot tty5
 sudo systemctl enable kmsconvt@tty5.service

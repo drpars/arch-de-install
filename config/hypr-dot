@@ -5,7 +5,11 @@ backupdir=$DIRUSER/.dotfiles/backup
 clonedir=$DIRUSER/.dotfiles/hypr-dot
 configfiles="$(ls $clonedir/config)"
 pictrs=$(xdg-user-dir PICTURES)
-
+homefiles="
+  .gitconfig
+  .gtkrc-2
+  .zshrc
+  "
 read -rep "Do do you want to start copy dotfiles ? (y,n)" copydot
 if [[ $copydot =~ ^[yY]$ ]]; then
   mkdir -p $backupdir
@@ -25,9 +29,12 @@ if [[ $copydot =~ ^[yY]$ ]]; then
   done
   # dotfiles
   ln -sr $clonedir/config/* $DIRUSER/.config
-  ln -sr $clonedir/.gitconfig $DIRUSER
-  ln -sr $clonedir/.gtkrc-2.0 $DIRUSER
-  ln -sr $clonedir/.zshrc $DIRUSER
+  # $HOME files
+  for sel in $homefiles; do
+    if [ -f $DIRUSER/$sel ]; then
+      ln -sr $clonedir/$sel $DIRUSER
+    fi
+  done
   printf "%s\n" "" "Config files are created."
 fi
 

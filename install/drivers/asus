@@ -32,4 +32,8 @@ if [ -f /usr/bin/supergfxctl ]; then
   svcenable power-profiles-daemon.service
 fi
 
+if [ -f /usr/bin/asusctl ]; then
+  asusctl -c 60
+fi
+
 exit 0

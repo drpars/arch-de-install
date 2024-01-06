@@ -1,0 +1,29 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+  "tar" "" off
+  "zip" "" off
+  "unzip" "" off
+  "unrar" "" off
+  "p7zip" "" off
+  "lzop" "" off
+)
+sel=$(dialog --backtitle "$apptitle" --title "Compression Tools :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
+  "${options[@]}" \
+  3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+  exit 1
+fi
+
+for itm in $sel; do
+  case $itm in
+  # "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  *) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
+  esac
+done
+
+instpkg "$pkg" "$aurpkg"
+
+exit 0

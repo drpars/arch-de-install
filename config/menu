@@ -98,7 +98,7 @@ case $sel in
 "Hyprland-Dotfiles")
   message "Script will open neovim editor. \nTo quit press ":q""
   nvim config/hypr-dot
-  if (confirm "Do you want to copy all dotfiles ? \n "); then
+  if (confirm "Do you want to apply script ? \n "); then
     clear
     script config/hypr-dot
     pressanykey

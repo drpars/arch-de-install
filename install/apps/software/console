@@ -3,11 +3,6 @@
 
 options=()
 options+=(
-  "zip" "" off
-  "unzip" "" off
-  "unrar" "" off
-  "p7zip" "" off
-  "lzop" "" off
   "cmatrix" "" off
   "neofetch" "" on
   "mpv" "" on

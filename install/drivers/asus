@@ -32,6 +32,7 @@ if [ -f /usr/bin/supergfxctl ]; then
   svcenable power-profiles-daemon.service
 fi
 
+# Battery max charge percentage
 if [ -f /usr/bin/asusctl ]; then
   asusctl -c 60
 fi

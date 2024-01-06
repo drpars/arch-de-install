@@ -10,7 +10,7 @@ homefiles="
   .gtkrc-2
   .zshrc
   "
-read -rep "Do do you want to start copy dotfiles ? (y,n)" copydot
+read -rep "Do do you want to copy dotfiles ? (y,n)" copydot
 if [[ $copydot =~ ^[yY]$ ]]; then
   mkdir -p $backupdir
   mkdir -p $clonedir
@@ -31,11 +31,14 @@ if [[ $copydot =~ ^[yY]$ ]]; then
   ln -sr $clonedir/config/* $DIRUSER/.config
   # $HOME files
   for sel in $homefiles; do
-    if [ -f $DIRUSER/$sel ]; then
+    if [ ! -f $DIRUSER/$sel ]; then
+      ln -sr $clonedir/$sel $DIRUSER
+    else
+      mv $backupdir
       ln -sr $clonedir/$sel $DIRUSER
     fi
   done
-  printf "%s\n" "" "Config files are created."
+  printf "%s\n" "" "Config files are copied."
 fi
 
 read -rep "Do you want to authorize $clonedir (hypr-dot repo) with github token key ? (y,n) : " auth
@@ -58,7 +61,7 @@ fi
 
 read -rep "Do you want to copy wallpapers ? (y,n) " wallpaper
 if [[ $wallpaper =~ ^[yY]$ ]]; then
-  cp -r $clonedir/wall-papers/Wallpaper $pictrs
+  cp -r $clonedir/Wallpaper $pictrs
 fi
 
 read -rep "Do you want to set sddm settings & theme ? (y,n) " sdm

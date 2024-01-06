@@ -3,30 +3,32 @@
 
 options=()
 options+=(
-	"Console" ""
-	"Generic" ""
-	"Xorg" ""
+  "Console" ""
+  "Compression Tools" ""
+  "Generic" ""
+  "Xorg" ""
   "File System" ""
   "File Browsers" ""
-	"Multimedia" ""
-	"Printer" ""
+  "Multimedia" ""
+  "Printer" ""
   "Programming Language" ""
   "Others" ""
 )
 
 defaultitem=""
 sel=$(dialog --backtitle "$apptitle" --title "Softwares :" --default-item "$defaultitem" --cancel-button "Back" --menu "" 0 0 0 \
-	"${options[@]}" \
-	3>&1 1>&2 2>&3)
+  "${options[@]}" \
+  3>&1 1>&2 2>&3)
 
 if [ ! "$?" = "0" ]; then
-	exit 1
+  exit 1
 fi
 
 sed -i "/^defaultitem=/c\defaultitem=\"$sel\"" $0
 
 case $sel in
 "Console") script install/apps/software/console ;;
+"Compression Tools") script install/apps/software/compression ;;
 "Generic") script install/apps/software/generic ;;
 "Xorg") script install/apps/software/xorg ;;
 "File System") script install/apps/software/filesystem ;;

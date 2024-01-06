@@ -1,6 +1,7 @@
 #!/bin/bash
 . ./lib
 
+sudo pacman -S --needed samba avahi
 sudo cp $DIR/config/smb.conf /etc/samba/
 sudo systemctl enable --now smb.service nmb.service
 sudo mkdir /var/lib/samba/usershares
@@ -9,3 +10,5 @@ sudo chown root:sambashare /var/lib/samba/usershares
 sudo chmod 1770 /var/lib/samba/usershares
 sudo gpasswd sambashare -a $USER
 sudo smbpasswd -a $USER
+
+sudo systemctl enable avahi-daemon.service

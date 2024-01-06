@@ -40,7 +40,6 @@ options+=(
   "imv" "" on
   "pamixer" "" on
   "pavucontrol" "" on
-  "blueman" "" on
   "iwgtk" "(AUR)" on
 )
 

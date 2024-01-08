@@ -10,7 +10,9 @@ if [ ! -f /usr/bin/dialog ]; then
 fi
 
 # create cache files
-rm -r $cachedir
+if [ -d $cachedir ]; then
+  rm -rf $cachedir
+fi
 mkdir -p $cachedir
 cp -r $workdir/* $cachedir/
 # execute installer

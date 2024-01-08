@@ -1,0 +1,19 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+"Hyprland Dotfiles" ""
+)
+sel=$(dialog --backtitle "$apptitle" --title "Dotfiles :" --cancel-button "Back" --menu "" 0 0 0 \
+  "${options[@]}" \
+  3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+  exit 1
+fi
+
+case $sel in
+  "Hyprland Dotfiles") menu config/dofiles/hypr-dot ;; 
+esac
+
+exit 0

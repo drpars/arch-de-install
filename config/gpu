@@ -15,7 +15,7 @@ fi
 
 if [ $gpumodule1 == "" ]; then
   gpumodule=$gpumodule2
-elif [ $gpumodule1 == "" ]; then
+elif [ $gpumodule2 == "" ]; then
   gpumodule=$gpumodule1
 else
   gpumodule="$gpumodule1 $gpumodule2"

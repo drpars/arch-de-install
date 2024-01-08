@@ -10,12 +10,10 @@ options+=(
   "smplayer-themes" "" off
   "mousepad" "" on
   "piper" "" off
-  "steam" "" on
-	"bleachbit" "Profile cleaner" off
-  "heroic-games-launcher-bin" "(AUR)" on
+  "bleachbit" "Profile cleaner" off
   "webapp-manager" "(AUR)" on
-	"stacer-bin" "(AUR)" off
-	"openrgb-bin" "(AUR)" off
+  "stacer-bin" "(AUR)" off
+  "openrgb-bin" "(AUR)" off
   "isomaster" "(AUR)" off
   "startup-settings-git" "(AUR)" off
 )
@@ -28,22 +26,15 @@ fi
 
 for itm in $sel; do
   case $itm in
-	"webapp-manager") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-	"stacer-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-	"openrgb-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  "webapp-manager") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  "stacer-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  "openrgb-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "isomaster") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   "startup-settings-git") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-  "heroic-games-launcher-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
   *) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
   esac
 done
 
 instpkg "$pkg" "$aurpkg"
-
-if [ -f /usr/share/applications/steam.desktop ]; then
-  if grep "PrefersNonDefaultGPU=true" /usr/share/applications/steam.desktop; then
-    sudo sed -i "s/PrefersNonDefaultGPU=true/PrefersNonDefaultGPU=false/g" /usr/share/applications/steam.desktop
-  fi
-fi
 
 exit 0

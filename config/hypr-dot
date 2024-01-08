@@ -34,7 +34,7 @@ if [[ $copydot =~ ^[yY]$ ]]; then
     if [ ! -f $DIRUSER/$sel ]; then
       ln -sr $clonedir/$sel $DIRUSER
     else
-      mv $backupdir
+      mv $DIRUSER/$sel $backupdir
       ln -sr $clonedir/$sel $DIRUSER
     fi
   done

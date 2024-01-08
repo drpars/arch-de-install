@@ -6,6 +6,7 @@ options+=(
   "Console" ""
   "Compression Tools" ""
   "Generic" ""
+  "Game Applications" ""
   "Xorg" ""
   "File System" ""
   "File Browsers" ""
@@ -30,6 +31,7 @@ case $sel in
 "Console") script install/apps/software/console ;;
 "Compression Tools") script install/apps/software/compression ;;
 "Generic") script install/apps/software/generic ;;
+"Game Applications") script install/apps/software/gameapps ;;
 "Xorg") script install/apps/software/xorg ;;
 "File System") script install/apps/software/filesystem ;;
 "File Browsers") script install/apps/software/filebrowser ;;

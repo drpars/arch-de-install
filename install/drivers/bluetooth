@@ -21,6 +21,8 @@ for itm in $sel; do
 	esac
 done
 
+instpkg "$pkg" "$aurpkg"
+
 svcenable bluetooth.service
 
-instpkg "$pkg" "$aurpkg"
+exit 0

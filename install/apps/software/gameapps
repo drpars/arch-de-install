@@ -1,0 +1,34 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+  "steam" "" on
+  "yuzu" "" on
+  "heroic-games-launcher-bin" "(AUR)" on
+)
+sel=$(dialog --backtitle "$apptitle" --title "Game Applications :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
+  "${options[@]}" \
+  3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+  exit 1
+fi
+
+for itm in $sel; do
+  case $itm in
+  "heroic-games-launcher-bin") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  *) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
+  esac
+done
+
+instpkg "$pkg" "$aurpkg"
+
+if (confirm "Do you want to change PrefersNonDefaultGPU=true to false in steam.desktop ?\n "); then
+  if [ -f /usr/share/applications/steam.desktop ]; then
+    if grep "PrefersNonDefaultGPU=true" /usr/share/applications/steam.desktop; then
+      sudo sed -i "s/PrefersNonDefaultGPU=true/PrefersNonDefaultGPU=false/g" /usr/share/applications/steam.desktop
+    fi
+  fi
+fi
+
+exit 0

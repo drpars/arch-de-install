@@ -9,16 +9,20 @@ if [ ! -f /usr/bin/dialog ]; then
   fi
 fi
 
-# create cache files
+# delete $cachedir if exist
 if [ -d $cachedir ]; then
   rm -rf $cachedir
 fi
+# create cache files
 mkdir -p $cachedir
 cp -r $workdir/* $cachedir/
+
 # execute installer
 chmod 755 $cachedir/lib
 # run installer
 sh $cachedir/lib --root
+
 # delete cache directory
 rm -rf $cachedir
+
 clear

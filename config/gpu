@@ -25,10 +25,9 @@ fi
 sudo sed -i "s/MODULES=()/MODULES=($gpumodule)/g" /etc/mkinitcpio.conf
 
 if [ $gpumodule2 != "" ]; then
-  # Nvidia drm modeset
-  printf "options nvidia-drm modeset=1" | sudo tee /etc/modprobe.d/nvidia.conf
+  # i think not needed with supergfxctl
   # Blacklist nouveau
-  printf "blacklist nouveau" | sudo tee /etc/modprobe.d/nouveau.conf
+  # printf "blacklist nouveau" | sudo tee /etc/modprobe.d/nouveau.conf
 fi
 
 sudo mkinitcpio -P

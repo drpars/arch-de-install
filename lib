@@ -97,6 +97,22 @@ svcenable() {
   fi
 }
 
+svcdisable(){
+  if [ "$2" = "" ]; then
+    displayname="$1"
+  else
+    displayname="$2 ($1)"
+  fi
+  if (confirm "Disable $displayname service at boot ?\n\nsystemctl disable $1") then
+    clear
+    echo "systemctl disable $1"
+    sudo systemctl disable $1
+    pressanykey
+  #else
+  #  exit 1
+  fi
+}
+
 # $1: pacman packages
 # $2: aur packages
 instpkg() {

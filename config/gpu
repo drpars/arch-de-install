@@ -1,5 +1,4 @@
 #!/bin/bash
-. ./lib
 
 if lspci | grep -E "(VGA|3D)" | awk '/AMD/'; then
   gpumodule1="amdgpu radeon"
@@ -23,11 +22,5 @@ fi
 
 # modify mkinitcpio.conf
 sudo sed -i "s/MODULES=()/MODULES=($gpumodule)/g" /etc/mkinitcpio.conf
-
-if [ $gpumodule2 != "" ]; then
-  # i think not needed with supergfxctl
-  # Blacklist nouveau
-  # printf "blacklist nouveau" | sudo tee /etc/modprobe.d/nouveau.conf
-fi
 
 sudo mkinitcpio -P

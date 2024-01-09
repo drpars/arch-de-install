@@ -1,0 +1,30 @@
+#!/bin/bash
+. ./lib
+
+# for systemd bootloader
+
+# current kernel settings
+part1=$(cat /etc/kernel/cmdline)
+# swap file for hibernate
+part2=$(findmnt -no UUID -T /swapfile)
+part3=$(filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}')
+# user kernel settings
+part4="quiet systemd.unit=graphical.target"
+# blacklist nouveau
+part5="rd.driver.blacklist=nouveau modprobe.blacklist=nouveau"
+# nvidia porperty
+part6="modeset=1"
+
+# all settings modified
+newkernel="$part1 resume=UUID=$part2 resume_offset=$part3 $part4 $part5 $part6"
+
+if [ -f /swapfile ]; then
+  printf "%s" "$newkernel" | sudo tee /etc/kernel/cmdline
+  sed -i -e 's/fsck/resume fsck/g' /etc/mkinitcpio.conf
+# sudo sed -Ei 's/^(HOOKS=\([^\)]*)\)/\1 resume)/' /etc/mkinitcpio.conf
+else
+  message "First, the swap file must be created. \nNo changes were made."
+  menu config/menu
+fi
+
+mkinitcpio -P

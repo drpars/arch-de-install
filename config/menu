@@ -5,7 +5,7 @@ options=()
 options+=(
   "Modify pacman.conf" ""
   "Create swap file" ""
-  "Hibernation settings" ""
+  "Kernel parameter" ""
   "GPU settings" ""
   "Patch vconsole" ""
   "SSH settings" ""
@@ -41,12 +41,12 @@ case $sel in
     pressanykey
   fi
   ;;
-"Hibernation settings")
+"Kernel parameter") 
   message "Script will open neovim editor. \nTo quit press ":q""
-  nvim config/hibernation
+  nvim config/modkernel
   if (confirm "Do you want to apply hibernation script ?"); then
     clear
-    sscript config/hibernation
+    sscript config/modkernel
     pressanykey
   fi
   ;;

@@ -11,4 +11,4 @@ sudo chmod 1770 /var/lib/samba/usershares
 sudo gpasswd sambashare -a $USER
 sudo smbpasswd -a $USER
 
-sudo systemctl enable avahi-daemon.service
+svcenable avahi-daemon.service

@@ -25,3 +25,5 @@ done
 instpkg "$pkg" "$aurpkg"
 
 sudo systemctl enable cups.service
+
+exit 0

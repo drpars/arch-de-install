@@ -44,7 +44,7 @@ case $sel in
 "Kernel parameter") 
   message "Script will open neovim editor. \nTo quit press ":q""
   nvim config/modkernel
-  if (confirm "Do you want to apply hibernation script ?"); then
+  if (confirm "Do you want to apply kernel script ?"); then
     clear
     sscript config/modkernel
     pressanykey

@@ -3,7 +3,6 @@
 
 options=()
 options+=(
-	"catppuccin-gtk-theme-mocha" "(AUR)" off
 	"qogir-icon-theme" "(AUR)" on
 	"mocu-xcursor" "(AUR)" on
 )
@@ -17,7 +16,6 @@ fi
 for itm in $sel; do
 	case $itm in
 	# "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-	"catppuccin-gtk-theme-mocha") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	"qogir-icon-theme") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	"mocu-xcursor") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
 	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;

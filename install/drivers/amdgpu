@@ -3,28 +3,30 @@
 
 options=()
 options+=(
-	"mesa" "" on
-	"lib32-mesa" "" on
+  "mesa" "" on
+  "lib32-mesa" "" on
   "xf86-video-amdgpu" "" on
   "vulkan-radeon" "" on
-	"lib32-vulkan-radeon" "" on
-	"libva-mesa-driver" "" on
-	"lib32-libva-mesa-driver" "" on
-	"mesa-vdpau" "" on
-	"lib32-mesa-vdpau" "" on
+  "lib32-vulkan-radeon" "" on
+  "libva-mesa-driver" "" on
+  "lib32-libva-mesa-driver" "" on
+  "mesa-vdpau" "" on
+  "lib32-mesa-vdpau" "" on
 )
 sel=$(dialog --backtitle "$apptitle" --title "Amd GPU :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \
-	"${options[@]}" \
-	3>&1 1>&2 2>&3)
+  "${options[@]}" \
+  3>&1 1>&2 2>&3)
 if [ ! "$?" = "0" ]; then
-	exit 1
+  exit 1
 fi
 
 for itm in $sel; do
-	case $itm in
-	# "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
-	*) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
-	esac
+  case $itm in
+  # "") aurpkg="$aurpkg $(echo $itm | sed 's/"//g')" ;;
+  *) pkg="$pkg $(echo $itm | sed 's/"//g')" ;;
+  esac
 done
 
 instpkg "$pkg" "$aurpkg"
+
+exit 0

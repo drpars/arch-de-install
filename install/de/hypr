@@ -6,7 +6,7 @@ options+=(
   "hyprland" "" on
   "hyprland-git" "(AUR)" off
   "xdg-desktop-portal-hyprland" "" on
-  "xdg-desktop-portal-gtk" "" on
+  "xdg-desktop-portal-gtk" "" off
   "hyprpicker" "(AUR)" on
   "qt5ct" "" off
   "qt5ct-kde" "(AUR)" on
@@ -40,7 +40,7 @@ options+=(
   "imv" "" on
   "pamixer" "" on
   "pavucontrol" "" on
-  "iwgtk" "(AUR)" on
+  "iwgtk" "(AUR)" off
 )
 
 sel=$(dialog --backtitle "$apptitle" --title "Hyprland :" --cancel-button "Back" --checklist "Choose what you want" 0 0 0 \

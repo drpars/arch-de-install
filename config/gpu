@@ -1,4 +1,5 @@
 #!/bin/bash
+. ./lib
 
 if lspci | grep -E "(VGA|3D)" | awk '/AMD/'; then
   gpumodule1="amdgpu radeon"
@@ -24,3 +25,5 @@ fi
 sudo sed -i "s/MODULES=()/MODULES=($gpumodule)/g" /etc/mkinitcpio.conf
 
 sudo mkinitcpio -P
+
+svcenable nvidia-powerd.service 

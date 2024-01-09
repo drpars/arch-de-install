@@ -25,3 +25,5 @@ for itm in $sel; do
 done
 
 instpkg "$pkg" "$aurpkg"
+
+exit 0

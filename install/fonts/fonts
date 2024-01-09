@@ -4,10 +4,6 @@
 options=()
 options+=(
   "ttf-jetbrains-mono-nerd" "" on
-  "ttf-jetbrains-mono" "" on
-  "ttf-fantasque-sans-mono" "" on
-  "adobe-source-code-pro-fonts" "" on
-  "noto-fonts-emoji" "" on
   "ttf-fantasque-nerd" "" on
   "ttf-ubuntu-nerd" "" on
   "ttf-ubuntu-mono-nerd" "" on

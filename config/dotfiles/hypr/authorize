@@ -12,6 +12,7 @@ homefiles="
   "
 
 if (confirm "Do you want to authorize $clonedir with github token key?");then
+  clear
   read -rep "Enter your github user name : " username
   read -rep "Enter token key : " token
   cd $clonedir

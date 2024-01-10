@@ -31,6 +31,7 @@ checkdot() {
 }
 
 if [ ! -d $cachedir/hypr-dot ]; then
+  clear
   git clone https://github.com/drpars/hypr-dot.git
 fi
 

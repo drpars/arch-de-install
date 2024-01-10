@@ -1,6 +1,8 @@
 #!/bin/bash
 . ./lib
 
+# will change
+# ---------------------------------------
 backupdir=$DIRUSER/.dotfiles/backup
 clonedir=$DIRUSER/.dotfiles/hypr-dot
 configfiles="$(ls $clonedir/config)"
@@ -10,7 +12,6 @@ homefiles="
   .gtkrc-2
   .zshrc
   "
-# will change
 checkdot() {
   # creating backup and clone folder
   mkdir -p $backupdir
@@ -31,6 +32,7 @@ checkdot() {
 }
 
 if [ ! -d $cachedir/hypr-dot ]; then
+  clear
   git clone https://github.com/drpars/hypr-dot.git
 fi
 
@@ -39,5 +41,6 @@ if (confirm "Do you want to copy wallpapers to $pictrs ?"); then
   checkdot
   cp -r $clonedir/Wallpaper $pictrs
 fi
+# ---------------------------------------
 
 exit 0

@@ -1,0 +1,66 @@
+#!/bin/bash
+. ./lib
+
+backupdir=$DIRUSER/.dotfiles/backup
+clonedir=$DIRUSER/.dotfiles/hypr-dot
+configfiles="$(ls $clonedir/config)"
+pictrs=$(xdg-user-dir PICTURES)
+homefiles="
+  .gitconfig
+  .gtkrc-2
+  .zshrc
+  "
+
+checkdot() {
+  # creating backup and clone folder
+  mkdir -p $backupdir
+  mkdir -p $clonedir
+  if diff -r $cachedir/hypr-dot $clonedir; then
+    message "$clonedir is up to date."
+  else
+    # different files
+    if (confirm "Dotfiles are already exist but out of date. \nDo you want to backup existing dotfiles."); then
+      mv $clonedir $backupdir
+      cp -r $cachedir/hypr-dot $DIRUSER/.dotfiles/
+      message "Old files are backed up to $backupdir."
+    else
+      rm -rf $clonedir
+      cp -r $cachedir/hypr-dot $DIRUSER/.dotfiles/
+    fi
+  fi
+}
+
+if [ ! -d $cachedir/hypr-dot ]; then
+  git clone https://github.com/drpars/hypr-dot.git
+fi
+
+if (confirm "Do do you want to copy dotfiles for hyprland?"); then
+  clear
+  checkdot
+  for sel in $configfiles; do
+    if [ -d $DIRUSER/.config/$sel ]; then
+      mv $DIRUSER/.config/$sel $backupdir
+    elif [ -L $DIRUSER/.config/$sel ]; then
+      rm $DIRUSER/.config/$sel
+    fi
+  done
+  # ~/.config files
+  ln -sr $clonedir/config/* $DIRUSER/.config
+  # ~ files
+  for sel in $homefiles; do
+    if [ ! -f $DIRUSER/$sel ]; then
+      ln -sr $clonedir/$sel $DIRUSER
+    else
+      mv $DIRUSER/$sel $backupdir
+      ln -sr $clonedir/$sel $DIRUSER
+    fi
+  done
+  # for root create symbolic link - .zshrc
+  if [ -d /root/.ohmyzsh ]; then
+    if [ -f /root/.zshrc ]; then
+      sudo mv /root/.zshrc $backupdir/.zshrc-root
+      sudo ln -sr $clonedir/.zshrc /root/
+    fi
+  fi
+  message "Config files are copied for home user."
+fi

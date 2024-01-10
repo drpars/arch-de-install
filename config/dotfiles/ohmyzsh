@@ -1,0 +1,32 @@
+#!/bin/bash
+. ./lib
+
+if [ -f /usr/bin/zsh ]; then
+  message "Oh my zsh will want to replace bash. \nTo continue, \nyou must type exit."
+
+  if [ ! -d $DIRUSER/.ohmyzsh ]; then
+    clear
+    # for home user
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  else
+    message "Oh my zsh is already installed for defined home user."
+  fi
+  # for root user
+  if (confirm "Do you want to install also for root ? \n"); then
+    if [ ! -d /root/.ohmyzsh ]; then
+      clear
+      sudo sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /root/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+      sudo git clone https://github.com/zsh-users/zsh-autosuggestions /root/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    else
+      message "Oh my zsh is already installed for root."
+    fi
+  fi
+  pressanykey
+else
+  message "zsh not detected !!"
+fi
+
+exit 0

@@ -1,0 +1,71 @@
+#!/bin/bash
+. ./lib
+
+backupdir=$DIRUSER/.dotfiles/backup
+clonedir=$DIRUSER/.dotfiles/hypr-dot
+configfiles="$(ls $clonedir/config)"
+pictrs=$(xdg-user-dir PICTURES)
+homefiles="
+  .gitconfig
+  .gtkrc-2
+  .zshrc
+  "
+
+checkdot() {
+  # creating backup and clone folder
+  mkdir -p $backupdir
+  mkdir -p $clonedir
+  if diff -r $cachedir/hypr-dot $clonedir; then
+    message "$clonedir is up to date."
+  else
+    # different files
+    if (confirm "Dotfiles are already exist but out of date. \nDo you want to backup existing dotfiles."); then
+      mv $clonedir $backupdir
+      cp -r $cachedir/hypr-dot $DIRUSER/.dotfiles/
+      message "Old files are backed up to $backupdir."
+    else
+      rm -rf $clonedir
+      cp -r $cachedir/hypr-dot $DIRUSER/.dotfiles/
+    fi
+  fi
+}
+
+if [ ! -d $cachedir/hypr-dot ]; then
+  git clone https://github.com/drpars/hypr-dot.git
+fi
+
+if (confirm "Do you want to copy themes ?"); then
+  clear
+  checkdot
+  if [ ! -d $DIRUSER/.themes ]; then
+    mkdir $DIRUSER/.themes
+  fi
+  tar -xzvf $clonedir/themes/Tokyonight-Dark-BL-LB.tar.gz -C $DIRUSER/.themes/
+  tar -xzvf $clonedir/themes/HeroicTheme.tar.gz -C $DIRUSER/.themes/
+fi
+
+if (confirm "Do you want to copy themes for sddm ?"); then
+  clear
+  checkdot
+  if [ -f /usr/bin/sddm ]; then
+    sddm_conf_dir=/etc/sddm.conf.d
+    if [ ! -d "$sddm_conf_dir" ]; then
+      printf "$sddm_conf_dir not found, creating...\n"
+      sudo mkdir "$sddm_conf_dir"
+    fi
+    echo -e "[Theme]\nCurrent=sugar-candy" | sudo tee "$sddm_conf_dir/10-theme.conf"
+    sudo cp $clonedir/sddm/sddm.conf "$sddm_conf_dir/"
+    sugar_candy_dir=/usr/share/sddm/themes/sugar-candy
+    if [ ! -d "$sugar_candy_dir" ]; then
+      printf "$sugar_candy_dir not found, creating...\n"
+      sudo tar -xzvf $clonedir/sddm/sugar-candy/sugar-candy.tar.gz -C /usr/share/sddm/themes/
+      sudo cp $clonedir/sddm/sugar-candy/theme.conf "$sugar_candy_dir/"
+      sudo cp $clonedir/sddm/sugar-candy/background.jpg "$sugar_candy_dir/Backgrounds/"
+    fi
+  else
+    message "Sddm not installed. \nFirstly install sddm!"
+    if (confirm "Do you want to jump Display Manager installation ? \n "); then
+      menu install/displaymngr/menu
+    fi
+  fi
+fi

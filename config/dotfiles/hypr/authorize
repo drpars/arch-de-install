@@ -1,0 +1,22 @@
+#!/bin/bash
+. ./lib
+
+backupdir=$DIRUSER/.dotfiles/backup
+clonedir=$DIRUSER/.dotfiles/hypr-dot
+configfiles="$(ls $clonedir/config)"
+pictrs=$(xdg-user-dir PICTURES)
+homefiles="
+  .gitconfig
+  .gtkrc-2
+  .zshrc
+  "
+
+if (confirm "Do you want to authorize $clonedir with github token key?");then
+  read -rep "Enter your github user name : " username
+  read -rep "Enter token key : " token
+  cd $clonedir
+  git remote set-url origin https://$username:$token@github.com/$username/hypr-dot.git
+  cd ..
+fi
+
+exit 0

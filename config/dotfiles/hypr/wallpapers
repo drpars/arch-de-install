@@ -1,0 +1,43 @@
+#!/bin/bash
+. ./lib
+
+backupdir=$DIRUSER/.dotfiles/backup
+clonedir=$DIRUSER/.dotfiles/hypr-dot
+configfiles="$(ls $clonedir/config)"
+pictrs=$(xdg-user-dir PICTURES)
+homefiles="
+  .gitconfig
+  .gtkrc-2
+  .zshrc
+  "
+# will change
+checkdot() {
+  # creating backup and clone folder
+  mkdir -p $backupdir
+  mkdir -p $clonedir
+  if diff -r $cachedir/hypr-dot $clonedir; then
+    message "$clonedir is up to date."
+  else
+    # different files
+    if (confirm "Dotfiles are already exist but out of date. \nDo you want to backup existing dotfiles."); then
+      mv $clonedir $backupdir
+      cp -r $cachedir/hypr-dot $DIRUSER/.dotfiles/
+      message "Old files are backed up to $backupdir."
+    else
+      rm -rf $clonedir
+      cp -r $cachedir/hypr-dot $DIRUSER/.dotfiles/
+    fi
+  fi
+}
+
+if [ ! -d $cachedir/hypr-dot ]; then
+  git clone https://github.com/drpars/hypr-dot.git
+fi
+
+if (confirm "Do you want to copy wallpapers to $pictrs ?"); then
+  clear
+  checkdot
+  cp -r $clonedir/Wallpaper $pictrs
+fi
+
+exit 0

@@ -1,0 +1,25 @@
+#!/bin/bash
+. ./lib
+
+options=()
+options+=(
+  "Copy dotfiles" ""
+  "Copy wallpapers" ""
+  "Copy themes" ""
+  "Authorize hypr-dot" ""
+)
+sel=$(dialog --backtitle "$apptitle" --title "Hyprland Dotfiles :" --cancel-button "Back" --menu "" 0 0 0 \
+  "${options[@]}" \
+  3>&1 1>&2 2>&3)
+if [ ! "$?" = "0" ]; then
+  exit 1
+fi
+
+case $sel in
+"Copy dotfiles") script config/dotfiles/hypr/dot ;;
+"Copy wallpapers") script config/dotfiles/hypr/wallpapers ;;
+"Copy themes") script config/dotfiles/hypr/themes ;;
+"Authorize hypr-dot") script config/dotfiles/hypr/authorize ;;
+esac
+
+exit 0

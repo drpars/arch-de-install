@@ -11,7 +11,7 @@ options+=(
   "SSH settings" ""
   "Samba settings" ""
   "Disk settings" ""
-  "Hyprland-Dotfiles" ""
+  "Dotfiles" ""
   "Neovim configs" ""
   "Remove neovim configs" ""
 )
@@ -41,7 +41,7 @@ case $sel in
     pressanykey
   fi
   ;;
-"Kernel parameter") 
+"Kernel parameter")
   message "Script will open neovim editor. \nTo quit press ":q""
   nvim config/modkernel
   if (confirm "Do you want to apply kernel script ?"); then
@@ -95,16 +95,8 @@ case $sel in
     pressanykey
   fi
   ;;
-"Hyprland-Dotfiles")
-  message "Script will open neovim editor. \nTo quit press ":q""
-  nvim config/hypr-dot
-  if (confirm "Do you want to apply script ? \n "); then
-    clear
-    script config/hypr-dot
-    pressanykey
-  else
-    message "Nothing copied \n "
-  fi
+"Dotfiles")
+  menu config/dotfiles/menu
   ;;
 "Neovim configs")
   if (confirm "Do you want to copy nvim config ? \n "); then

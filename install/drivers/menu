@@ -6,7 +6,7 @@ options+=(
   "Amd GPU" ""
   "Nvidia driver" ""
   "Asus Rog Strix" ""
-  "Bluetooth" ""
+  "Network" ""
   "Sound" ""
   "Mkinitcpio firmware" "(AUR)"
 )
@@ -26,7 +26,7 @@ case $sel in
   menu install/drivers/nvidia
   ;;
 "Asus Rog Strix") script install/drivers/asus ;;
-"Bluetooth") script install/drivers/bluetooth ;;
+"Network") script install/drivers/network ;;
 "Sound") script install/drivers/sound ;;
 "Mkinitcpio firmware")
   if (confirm "Do you want to install firmware ? \n "); then

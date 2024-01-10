@@ -3,6 +3,7 @@
 
 options=()
 options+=(
+"Oh my zsh" ""
 "Hyprland Dotfiles" ""
 )
 sel=$(dialog --backtitle "$apptitle" --title "Dotfiles :" --cancel-button "Back" --menu "" 0 0 0 \
@@ -13,7 +14,8 @@ if [ ! "$?" = "0" ]; then
 fi
 
 case $sel in
-  "Hyprland Dotfiles") menu config/dofiles/hypr-dot ;; 
+  "Oh my zsh") script config/dotfiles/ohmyzsh ;;
+  "Hyprland Dotfiles") menu config/dotfiles/hypr/menu ;; 
 esac
 
 exit 0

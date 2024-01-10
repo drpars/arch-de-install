@@ -7,3 +7,5 @@ sudo mkswap /swapfile
 sudo swapon /swapfile
 
 printf "%s\n" "" "/swapfile none swap defaults 0 0" | sudo tee -a /etc/fstab 
+
+exit 0

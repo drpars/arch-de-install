@@ -88,3 +88,5 @@ if [[ $sdm =~ ^[yY]$ ]]; then
     fi
   fi
 fi
+
+exit 0

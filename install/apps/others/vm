@@ -30,3 +30,5 @@ fi
 svcenable libvirtd.service
 
 pressanykey
+
+exit 0

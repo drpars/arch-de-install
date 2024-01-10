@@ -28,3 +28,5 @@ else
 fi
 
 mkinitcpio -P
+
+exit 0

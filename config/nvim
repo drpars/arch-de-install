@@ -11,3 +11,5 @@ if (confirm "Also do you want to set nvim for root"); then
   sudo ln -sf $DIRUSER/.config/nvim/* /root/.config/nvim
   message "Nvim config files are copied for root. \n "
 fi
+
+exit 0

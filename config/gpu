@@ -27,3 +27,5 @@ sudo sed -i "s/MODULES=()/MODULES=($gpumodule)/g" /etc/mkinitcpio.conf
 sudo mkinitcpio -P
 
 svcenable nvidia-powerd.service 
+
+exit 0

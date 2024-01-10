@@ -12,3 +12,5 @@ sudo gpasswd sambashare -a $USER
 sudo smbpasswd -a $USER
 
 svcenable avahi-daemon.service
+
+exit 0

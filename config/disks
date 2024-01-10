@@ -12,3 +12,5 @@ else
 fi
 
 printf "%s\n" "" "# NTFS disks" "UUID=$veri  /mnt/Veri ntfs  defaults,rw,errors=remount-ro,uid=1000  0 0" "UUID=$data  /mnt/Data ntfs  defaults,rw,errors=remount-ro,uid=1000  0 0" | sudo tee -a /etc/fstab
+
+exit 0

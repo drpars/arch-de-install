@@ -4,7 +4,6 @@
 backupdir=$DIRUSER/.dotfiles/backup
 clonedir=$DIRUSER/.dotfiles/hypr-dot
 configfiles="$(ls $clonedir/config)"
-pictrs=$(xdg-user-dir PICTURES)
 homefiles="
   .gitconfig
   .gtkrc-2.0

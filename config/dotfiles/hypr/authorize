@@ -1,20 +1,12 @@
 #!/bin/bash
 . ./lib
 
-backupdir=$DIRUSER/.dotfiles/backup
 clonedir=$DIRUSER/.dotfiles/hypr-dot
-configfiles="$(ls $clonedir/config)"
-pictrs=$(xdg-user-dir PICTURES)
-homefiles="
-  .gitconfig
-  .gtkrc-2
-  .zshrc
-  "
 
-if (confirm "Do you want to authorize $clonedir with github token key?");then
+if (confirm "Do you want to authorize $clonedir with github token key?"); then
+  username=$(dialog --backtitle "$apptitle" --title "Authorize hypr-dot repo" --inputbox "Enter your github user name :" 0 0 3>&1 1>&2 2>&3)
+  token=$(dialog --backtitle "$apptitle" --title "Authorize hypr-dot repo" --inputbox "Enter your github token key :" 0 0 3>&1 1>&2 2>&3)
   clear
-  read -rep "Enter your github user name : " username
-  read -rep "Enter token key : " token
   cd $clonedir
   git remote set-url origin https://$username:$token@github.com/$username/hypr-dot.git
   cd ..

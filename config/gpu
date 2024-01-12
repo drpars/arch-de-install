@@ -1,31 +1,29 @@
 #!/bin/bash
 . ./lib
 
-if lspci | grep -E "(VGA|3D)" | awk '/AMD/'; then
-  gpumodule1="amdgpu radeon"
-else
+gpumodule_amd="amdgpu radeon"
+gpumodule_nvidia="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
+
+if ! lspci | grep -E "(VGA|3D)" | awk '/AMD/'; then
   gpumodule1=""
 fi
 
-if lspci | grep -E "(VGA|3D)" | awk '/NVIDIA/'; then
-  gpumodule2="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
-else
+if ! lspci | grep -E "(VGA|3D)" | awk '/NVIDIA/'; then
   gpumodule2=""
 fi
 
 if [ $gpumodule1 == "" ]; then
-  gpumodule=$gpumodule2
+  gpumodule=$gpumodule_nvidia
 elif [ $gpumodule2 == "" ]; then
-  gpumodule=$gpumodule1
+  gpumodule=$gpumodule_amd
 else
   gpumodule="$gpumodule1 $gpumodule2"
 fi
 
 # modify mkinitcpio.conf
 sudo sed -i "s/MODULES=()/MODULES=($gpumodule)/g" /etc/mkinitcpio.conf
-
 sudo mkinitcpio -P
 
-svcenable nvidia-powerd.service 
+svcenable nvidia-powerd.service
 
 exit 0

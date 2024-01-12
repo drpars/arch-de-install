@@ -5,13 +5,8 @@
 # ---------------------------------------
 backupdir=$DIRUSER/.dotfiles/backup
 clonedir=$DIRUSER/.dotfiles/hypr-dot
-configfiles="$(ls $clonedir/config)"
 pictrs=$(xdg-user-dir PICTURES)
-homefiles="
-  .gitconfig
-  .gtkrc-2
-  .zshrc
-  "
+
 checkdot() {
   # creating backup and clone folder
   mkdir -p $backupdir

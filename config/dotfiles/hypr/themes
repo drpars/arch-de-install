@@ -70,3 +70,5 @@ if (confirm "Do you want to copy themes for sddm ?"); then
     fi
   fi
 fi
+
+exit 0

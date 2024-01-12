@@ -64,3 +64,5 @@ if (confirm "Do do you want to copy dotfiles for hyprland?"); then
   fi
   message "Config files are copied for home user."
 fi
+
+exit 0
